@@ -1,0 +1,292 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: #f4f9f7;
+  color: #1c2b28;
+}
+
+/* ================= TRANSPARENT LOGIN CARD ================= */
+#authSection .card {
+  background: rgba(255, 255, 255, 0.18); /* transparency */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  max-width: 900px;
+  margin: 60px auto;
+  padding: 30px;
+  border-radius: 18px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+  color: #fff;
+}
+
+/* ================= TRANSPARENT FORM BOX ================= */
+#authSection .form-box {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 25px;
+  border-radius: 14px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+}
+
+/* ================= INPUTS ================= */
+#authSection .form-box input {
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  padding: 10px;
+  border-radius: 6px;
+}
+
+/* ================= BUTTON ================= */
+#authSection .form-box button {
+  background: #0f5c45;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+#authSection h2,
+#authSection h3 {
+  color: #ffffff;
+}
+
+
+/* ================= LOGIN PAGE BACKGROUND ================= */
+#authSection {
+  min-height: 100vh;
+  background-image: url("image1.jpg"); /* background image */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  display: flex;
+  flex-direction: column;
+}
+
+/* dark overlay for readability */
+#authSection::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 0;
+}
+
+/* keep content above overlay */
+#authSection > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* center the login card nicely */
+#authSection .card {
+  margin-top: 40px;
+}
+
+
+/* HEADER */
+header {
+  background: linear-gradient(90deg, #0f5c45, #1e8f6f);
+  padding: 15px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+}
+
+/* NAV LINKS */
+nav a {
+  position: relative;
+  color: #fff;
+   
+  margin-left: 18px;
+  font-weight: 600;
+  padding-bottom: 6px;
+}
+
+/* single animated line */
+nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background-color: #ffffff;
+  transition: width 0.3s ease;
+}
+
+/* hover effect */
+nav a:hover::after {
+  width: 100%;
+}
+
+ 
+
+
+/* CARD */
+.card {
+  background: white;
+  max-width: 1100px;
+  margin: 30px auto;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+/* FORMS */
+.form-container {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.form-box {
+  width: 280px;
+  padding: 25px;
+  background: white;
+  border-radius: 14px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+.form-box input, .form-box button {
+  width: 100%;
+  margin-top: 12px;
+  padding: 10px;
+}
+
+.form-box button {
+  background: #0f5c45;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+/* SLIDER */
+.slider {
+  position: relative;
+  height: 420px;
+  overflow: hidden;
+  background-image: url("image1.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.slides {
+  display: flex;
+  width: 400%;
+  animation: slide 40s linear infinite;
+}
+
+.slides img {
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+}
+
+@keyframes slide {
+  from { transform: translateX(0); }
+  to { transform: translateX(-300%); }
+}
+
+.slider-text {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* PAGE SWITCH ANIMATION */
+.page {
+  display: none;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.page.active {
+  display: block;
+  animation: pageAnim 0.6s ease forwards;
+}
+
+@keyframes pageAnim {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes trainMove {
+  from { transform: translateX(0); }
+  to { transform: translateX(-100%); }
+}
+
+/* ================= ACTIVITIES GALLERY ================= */
+
+.activities-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+  margin-top: 25px;
+}
+
+.activities-gallery img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+}
+
+/* HOVER EFFECT */
+.activities-gallery img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+}
+
+
+
+/* OTHERS */
+.center-text {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.center-img {
+  text-align: center;
+  margin-top: 25px;
+}
+
+.center-img img {
+  max-width: 90%;
+  border-radius: 14px;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  background: #0f5c45;
+  color: white;
+  margin-top: 40px;
+}
+
+nav a.active {
+  text-decoration: underline;
+  font-weight: bold;
+}

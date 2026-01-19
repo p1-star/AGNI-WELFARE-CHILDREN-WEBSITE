@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Agni Rural Welfare Society</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- ================= LOGIN / SIGNUP ================= -->
+<div id="authSection">
+
+  <header>
+    <h1>Agni Rural Welfare Society</h1>
+  </header>
+
+  <section class="card">
+    <div class="form-container">
+      <div class="form-box">
+        <h3>Login</h3>
+        <input type="text" id="loginUser" placeholder="Username">
+        <input type="password" id="loginPass" placeholder="Password">
+        <button onclick="login()">Login</button>
+      </div>
+
+      <div class="form-box">
+        <h3>Sign Up</h3>
+        <input type="text" placeholder="Full Name">
+        <input type="email" placeholder="Email">
+        <input type="password" placeholder="Password">
+        <button onclick="signup()">Sign Up</button>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ================= WEBSITE ================= -->
+<div id="website" style="display:none;">
+
+  <header>
+    <h1>Agni Rural Welfare Society</h1>
+    <nav>
+      <a onclick="showPage('home')">Home</a>
+      <a onclick="showPage('about')">About Us</a>
+      <a onclick="showPage('activities')">Activities</a>
+      <a onclick="showPage('jobs')">Jobs</a>
+      <a onclick="showPage('membership')">Membership</a>
+      <a onclick="showPage('volunteer')">Volunteer</a>
+      <a onclick="showPage('supporters')">Supporters</a>
+      <a onclick="showPage('contact')">Contact</a>
+      <a onclick="logout()">Logout</a>
+    </nav>
+  </header>
+
+  <section class="card">
+    <h3>Welcome, <span id="displayUser"></span></h3>
+  </section>
+
+  <!-- ================= HOME ================= -->
+  <section id="home" class="page active">
+    <div class="slider">
+      <div class="slides">
+        <img src="image1.jpg">
+        <img src="image3.jpg">
+        <img src="image4.jpg">
+        <img src="image1.jpg">
+        <img src="image4.jpg">
+        <img src="image3.jpg">
+      </div>
+      <div class="slider-text">
+        <h2>Spreading Joy Through Social Service</h2>
+        <p>Working together for children, communities, and a better tomorrow</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ABOUT ================= -->
+  <section id="about" class="page">
+    <h2>About Us</h2>
+    <p class="center-text">
+      Agni Rural Welfare Society is a non-profit organization committed to social service
+      and community development. Our primary focus is to support underprivileged children,
+      rural families, and vulnerable communities through education, care, relief work,
+      and social awareness initiatives.
+    </p>
+    <p class="center-text">
+      We believe that social service is a noble responsibility and that collective effort
+      can bring meaningful change to society.
+    </p>
+  </section>
+
+  <!-- ================= ACTIVITIES ================= -->
+  <section id="activities" class="page">
+    <h2>Our Social Activities</h2>
+    <p class="center-text">
+      As part of our ongoing social initiatives, Agni Rural Welfare Society supports poor
+      school students in the Sundarbans by providing new clothes, study materials, portion food,
+      and essential items.
+    </p>
+    <p class="center-text">
+      These activities aim to bring joy, dignity, and a sense of inclusion to children from
+      economically disadvantaged backgrounds.
+    </p>
+
+    <div class="activities-gallery">
+      <img src="image5.jpg">
+      <img src="image6.jpg">
+      <img src="image7.jpg">
+      <img src="image8.jpg">
+      <img src="image9.jpg">
+      <img src="image10.jpg">
+    </div>
+  </section>
+
+  <!-- ================= JOBS ================= -->
+  <section id="jobs" class="page">
+    <h2>Job Vacancy – NCC Trainers</h2>
+    <p class="center-text">
+      Agni Rural Welfare Society (NGO) invites applications for full-time Trainer / Drill
+      Instructor roles under our NGO training projects.
+    </p>
+    <p class="center-text">
+      Training areas include Drill, Band, Physical Training, Sports, Obstacle Management,
+      Disaster Management, Civil Defence, and preparation for NDA, IMA, OTA (Indian Army,
+      Navy, Air Force) examinations.
+    </p>
+    <p class="center-text">
+      Interested candidates may send their CV or Resume with photograph via WhatsApp.
+    </p>
+    <div class="center-img">
+      <img src="image13.png" alt="jobs">
+    </div>
+  </section>
+
+  <!-- ================= MEMBERSHIP ================= -->
+  <section id="membership" class="page">
+    <h2>Become a Member</h2>
+    <p class="center-text">
+      Membership at Agni Rural Welfare Society is for social service and social responsibility.
+      It is not intended for political or profit-making purposes.
+    </p>
+    <p class="center-text">
+      Members are encouraged to actively participate in service activities or indirectly
+      support the organization’s welfare initiatives.
+    </p>
+
+    <div class="center-img">
+      <img src="image12.png" alt="Membership Criteria">
+    </div>
+
+    <p class="center-text">
+      <strong>Benefits of Membership:</strong><br>
+      Members are invited to participate in various activities and events organized by
+      Agni Rural Welfare Society.<br>
+      <em>Terms & Conditions Apply.</em>
+    </p>
+  </section>
+
+  <!-- ================= VOLUNTEER ================= -->
+  <section id="volunteer" class="page">
+    <h2>Join as a Volunteer</h2>
+    <p class="center-text">
+      Volunteering with Agni Rural Welfare Society is an opportunity to engage in meaningful
+      social service and contribute to community welfare.
+    </p>
+    <p class="center-text">
+      Volunteers play an important role in supporting activities, outreach programs, and
+      service initiatives.
+    </p>
+  </section>
+
+  <!-- ================= SUPPORTERS ================= -->
+  <section id="supporters" class="page">
+    <h2>Supporters of the Society</h2>
+    <p class="center-text">
+      Corporate Social Responsibility (CSR) divisions of companies, funding agencies, and
+      institutions may associate with Agni Rural Welfare Society under the
+      <strong>“Supporters of the Society”</strong> category.
+    </p>
+    <p class="center-text">
+      Such support helps strengthen our welfare programs and extend our reach to
+      underserved communities.
+    </p>
+  </section>
+
+  <!-- ================= CONTACT ================= -->
+  <section id="contact" class="page">
+    <h2>Contact Us</h2>
+    <p class="center-text">
+      We welcome individuals, volunteers, donors, and organizations to connect with us.
+    </p>
+    <p class="center-text">
+      <strong>Phone:</strong> +91 9433834013
+    </p>
+  </section>
+
+  <footer>
+    <p>© Agni Rural Welfare Society | Serving Society with Responsibility</p>
+  </footer>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
