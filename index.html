@@ -9,31 +9,85 @@
 
 <body>
 
-<!-- ================= LOGIN / SIGNUP ================= -->
-<div id="authSection">
+<!-- ================= LOGIN / REGISTER ================= -->
+<div id="authSection" class="auth-wrapper">
 
-  <header>
-    <h1>Agni Rural Welfare Society</h1>
-  </header>
-
-  <section class="card">
-    <div class="form-container">
-      <div class="form-box">
-        <h3>Login</h3>
-        <input type="text" id="loginUser" placeholder="Username">
-        <input type="password" id="loginPass" placeholder="Password">
-        <button onclick="login()">Login</button>
-      </div>
-
-      <div class="form-box">
-        <h3>Sign Up</h3>
-        <input type="text" placeholder="Full Name">
-        <input type="email" placeholder="Email">
-        <input type="password" placeholder="Password">
-        <button onclick="signup()">Sign Up</button>
-      </div>
+  <div class="auth-container">
+    <div class="auth-header">
+      <h1>Agni Rural Welfare Society</h1>
+      <p class="subtitle">Serving Society with Responsibility</p>
     </div>
-  </section>
+
+    <!-- Tab Navigation -->
+    <div class="auth-tabs">
+      <button class="tab-btn active" onclick="switchTab('login')">Login</button>
+      <button class="tab-btn" onclick="switchTab('register')">Register</button>
+    </div>
+
+    <!-- Login Form -->
+    <form id="loginForm" class="auth-form active">
+      <h2>Welcome Back</h2>
+      <p class="form-subtitle">Sign in to your account</p>
+      
+      <div class="form-group">
+        <label for="loginUser">Username</label>
+        <input type="text" id="loginUser" placeholder="Enter your username">
+      </div>
+      
+      <div class="form-group">
+        <label for="loginPass">Password</label>
+        <input type="password" id="loginPass" placeholder="Enter your password">
+      </div>
+
+      <button type="button" onclick="login()" class="auth-button">Sign In</button>
+      
+      <div class="form-footer">
+        <label class="remember-me">
+          <input type="checkbox"> Remember me
+        </label>
+      </div>
+    </form>
+
+    <!-- Register Form -->
+    <form id="registerForm" class="auth-form">
+      <h2>Create Account</h2>
+      <p class="form-subtitle">Join our mission today</p>
+      
+      <div class="form-group">
+        <label for="registerName">Full Name</label>
+        <input type="text" id="registerName" placeholder="Enter your full name">
+      </div>
+
+      <div class="form-group">
+        <label for="registerEmail">Email</label>
+        <input type="email" id="registerEmail" placeholder="Enter your email">
+      </div>
+      
+      <div class="form-group">
+        <label for="registerPass">Password</label>
+        <input type="password" id="registerPass" placeholder="Create a password">
+      </div>
+
+      <div class="form-group">
+        <label for="registerConfirm">Confirm Password</label>
+        <input type="password" id="registerConfirm" placeholder="Confirm your password">
+      </div>
+
+      <button type="button" onclick="register()" class="auth-button">Create Account</button>
+      
+      <div class="form-footer">
+        <label class="terms-agree">
+          <input type="checkbox" required> I agree to the terms and conditions
+        </label>
+      </div>
+    </form>
+  </div>
+
+  <div class="auth-side-decoration">
+    <div class="decoration-circle decoration-1"></div>
+    <div class="decoration-circle decoration-2"></div>
+    <div class="decoration-circle decoration-3"></div>
+  </div>
 
 </div>
 
@@ -50,6 +104,7 @@
       <a onclick="showPage('membership')">Membership</a>
       <a onclick="showPage('volunteer')">Volunteer</a>
       <a onclick="showPage('supporters')">Supporters</a>
+      <a onclick="showPage('donate')">Donate</a>
       <a onclick="showPage('contact')">Contact</a>
       <a onclick="logout()">Logout</a>
     </nav>
@@ -169,7 +224,7 @@
     <p class="center-text">
       Volunteers play an important role in supporting activities, outreach programs, and
       service initiatives.
-    </p>
+    </p>  
   </section>
 
   <!-- ================= SUPPORTERS ================= -->
@@ -184,6 +239,61 @@
       Such support helps strengthen our welfare programs and extend our reach to
       underserved communities.
     </p>
+  </section>
+  <!-- ================= DONATE ================= -->
+  <section id="donate" class="page">
+    <h2>Support Our Mission</h2>
+    <p class="center-text">
+      Your donation helps us continue our mission to support underprivileged children and rural communities.
+      Every contribution makes a meaningful difference!
+    </p>
+
+    <div class="donation-container">
+      <div class="donation-box">
+        <h3>Choose Donation Amount</h3>
+        
+        <div class="donation-options">
+           <button class="amount-btn" onclick="selectAmount(100, this)">₹100</button>
+           <button class="amount-btn" onclick="selectAmount(500, this)">₹500</button>
+           <button class="amount-btn" onclick="selectAmount(1000, this)">₹1,000</button>
+           <button class="amount-btn" onclick="selectAmount(5000, this)">₹5,000</button>
+        </div>
+
+        <div class="custom-amount">
+          <label for="customAmount">Or Enter Custom Amount:</label>
+          <input type="number" id="customAmount" placeholder="Enter amount in ₹" min="1">
+        </div>
+
+        <div class="donor-info">
+          <input type="text" id="donorName" placeholder="Your Full Name" required>
+          <input type="email" id="donorEmail" placeholder="Your Email Address" required>
+          <input type="tel" id="donorPhone" placeholder="Your Phone Number" required>
+        </div>
+
+        <button class="donate-btn" onclick="initiatePayment()">Proceed to Payment</button>
+
+        <p class="info-text">
+          💳 Secure payment powered by Razorpay<br>
+          ✓ 100% of your donation goes to our welfare programs
+        </p>
+      </div>
+
+      <div class="impact-box">
+        <h3>Your Impact</h3>
+        <div class="impact-item">
+          <strong>₹100</strong><br>Provides books & stationery for one child
+        </div>
+        <div class="impact-item">
+          <strong>₹500</strong><br>One month nutritious meal for a child
+        </div>
+        <div class="impact-item">
+          <strong>₹1,000</strong><br>Educational supplies for a student
+        </div>
+        <div class="impact-item">
+          <strong>₹5,000</strong><br>Monthly support for rural education program
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- ================= CONTACT ================= -->
@@ -203,6 +313,7 @@
 
 </div>
 
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script src="script.js"></script>
 </body>
 </html>
