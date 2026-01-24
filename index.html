@@ -34,9 +34,12 @@
         <input type="text" id="loginUser" placeholder="Enter your username">
       </div>
       
-      <div class="form-group">
+      <div class="form-group password-group">
         <label for="loginPass">Password</label>
-        <input type="password" id="loginPass" placeholder="Enter your password">
+        <div class="password-input-wrapper">
+          <input type="password" id="loginPass" placeholder="Enter your password">
+          <button type="button" class="password-toggle" onclick="togglePassword('loginPass')">👁️</button>
+        </div>
       </div>
 
       <button type="button" onclick="login()" class="auth-button">Sign In</button>
@@ -63,14 +66,20 @@
         <input type="email" id="registerEmail" placeholder="Enter your email">
       </div>
       
-      <div class="form-group">
+      <div class="form-group password-group">
         <label for="registerPass">Password</label>
-        <input type="password" id="registerPass" placeholder="Create a password">
+        <div class="password-input-wrapper">
+          <input type="password" id="registerPass" placeholder="Create a password">
+          <button type="button" class="password-toggle" onclick="togglePassword('registerPass')">👁️</button>
+        </div>
       </div>
 
-      <div class="form-group">
+      <div class="form-group password-group">
         <label for="registerConfirm">Confirm Password</label>
-        <input type="password" id="registerConfirm" placeholder="Confirm your password">
+        <div class="password-input-wrapper">
+          <input type="password" id="registerConfirm" placeholder="Confirm your password">
+          <button type="button" class="password-toggle" onclick="togglePassword('registerConfirm')">👁️</button>
+        </div>
       </div>
 
       <button type="button" onclick="register()" class="auth-button">Create Account</button>
@@ -89,6 +98,14 @@
     <div class="decoration-circle decoration-3"></div>
   </div>
 
+  <!-- Loading Overlay -->
+  <div id="loadingOverlay" class="loading-overlay">
+    <div class="loading-container">
+      <div class="spinner"></div>
+      <p class="verifying-text">Verifying</p>
+    </div>
+  </div>
+
 </div>
 
 <!-- ================= WEBSITE ================= -->
@@ -96,6 +113,7 @@
 
   <header>
     <h1>Agni Rural Welfare Society</h1>
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
     <nav>
       <a onclick="showPage('home')">Home</a>
       <a onclick="showPage('about')">About Us</a>
@@ -104,6 +122,7 @@
       <a onclick="showPage('membership')">Membership</a>
       <a onclick="showPage('volunteer')">Volunteer</a>
       <a onclick="showPage('supporters')">Supporters</a>
+      <a onclick="showPage('gallery')">Gallery</a>
       <a onclick="showPage('donate')">Donate</a>
       <a onclick="showPage('contact')">Contact</a>
       <a onclick="logout()">Logout</a>
@@ -240,6 +259,32 @@
       underserved communities.
     </p>
   </section>
+  <!-- ================= GALLERY ================= -->
+  <section id="gallery" class="page">
+    <h2>Gallery</h2>
+    <p class="center-text">
+      Browse through our collection of moments from our social service initiatives and community activities.
+    </p>
+    
+    <div class="gallery-container">
+      <div class="gallery-viewer">
+        <div class="gallery-image-wrapper">
+          <img id="galleryImage" src="" alt="Gallery Image" class="gallery-main-image">
+        </div>
+        <div class="gallery-progress">
+          <div class="gallery-progress-bar" id="progressBar"></div>
+        </div>
+        <div class="gallery-counter">
+          <span id="currentImageIndex">1</span> / <span id="totalImages">0</span>
+        </div>
+      </div>
+      
+      <div class="gallery-controls">
+        <button class="gallery-btn" onclick="previousImage()">← Previous</button>
+        <button class="gallery-btn" onclick="nextImage()">Next →</button>
+      </div>
+    </div>
+  </section>
   <!-- ================= DONATE ================= -->
   <section id="donate" class="page">
     <h2>Support Our Mission</h2>
@@ -304,6 +349,12 @@
     </p>
     <p class="center-text">
       <strong>Phone:</strong> +91 9433834013
+    </p>
+    <p class="center-text">
+      <strong>YouTube:</strong> <a href="https://www.youtube.com/@Agniruralwelfaresociety" target="_blank">https://www.youtube.com/@Agniruralwelfaresociety</a>
+    </p>
+    <p class="center-text">
+      <strong>Facebook:</strong> <a href="https://www.facebook.com/profile.php?id=61559729252246&mibextid=ZbWKwL" target="_blank">https://www.facebook.com/profile.php?id=61559729252246&mibextid=ZbWKwL</a>
     </p>
   </section>
 
