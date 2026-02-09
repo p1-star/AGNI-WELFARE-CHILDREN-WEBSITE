@@ -11,6 +11,33 @@ body {
   overflow-x: hidden;
 }
 
+/* ================= GLOBAL SCROLLBAR STYLING ================= */
+/* Webkit browsers (Chrome, Safari, Edge) */
+*::-webkit-scrollbar {
+  width: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: rgba(15, 92, 69, 0.1);
+  border-radius: 10px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: rgba(15, 92, 69, 0.5);
+  border-radius: 10px;
+  transition: background 0.3s ease;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: rgba(15, 92, 69, 0.7);
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(15, 92, 69, 0.5) rgba(15, 92, 69, 0.1);
+}
+
 /* ================= MODERN AUTH STYLES ================= */
 .auth-wrapper {
   min-height: 100vh;
@@ -85,6 +112,7 @@ body {
     opacity: 0;
     transform: translateY(30px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -166,6 +194,7 @@ body {
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -304,6 +333,7 @@ body {
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
@@ -318,9 +348,12 @@ body {
 }
 
 @keyframes blink {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 1;
   }
+
   50% {
     opacity: 0.5;
   }
@@ -452,7 +485,7 @@ nav a:hover::after {
   width: 100%;
 }
 
- 
+
 
 
 /* CARD */
@@ -462,7 +495,7 @@ nav a:hover::after {
   margin: 30px auto;
   padding: 30px;
   border-radius: 16px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   width: 100%;
 }
 
@@ -479,10 +512,11 @@ nav a:hover::after {
   padding: 25px;
   background: white;
   border-radius: 14px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
 }
 
-.form-box input, .form-box button {
+.form-box input,
+.form-box button {
   width: 100%;
   margin-top: 12px;
   padding: 10px;
@@ -509,8 +543,19 @@ nav a:hover::after {
 .slides {
   display: flex;
   width: 400%;
-  animation: slide 40s linear infinite;
+  animation: slide 200s linear infinite;
 }
+
+:root {
+  --slider-speed: 200s;
+}
+
+.slides {
+  display: flex;
+  width: 400%;
+  animation: slide var(--slider-speed) linear infinite;
+}
+
 
 .slides img {
   width: 100%;
@@ -519,20 +564,77 @@ nav a:hover::after {
 }
 
 @keyframes slide {
-  from { transform: translateX(0); }
-  to { transform: translateX(-300%); }
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-300%);
+  }
 }
 
 .slider-text {
   position: absolute;
   inset: 0;
-  background: rgba(0,0,0,0.45);
+  background: rgba(0, 0, 0, 0.45);
   color: white;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
+  padding: 20px;
+  overflow: hidden;
 }
+
+.slider-text .top-fixed {
+  position: relative;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 20px;
+  flex-shrink: 0;
+}
+
+.slider-text .bottom-scroll {
+  position: relative;
+  width: 100%;
+  max-width: 90%;
+  max-height: calc(420px - 120px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 15px;
+  text-align: center;
+  flex: 1;
+}
+
+/* Custom Scrollbar for bottom-scroll - Right Side */
+.slider-text .bottom-scroll::-webkit-scrollbar {
+  width: 8px;
+  position: absolute;
+  right: 0;
+}
+
+.slider-text .bottom-scroll::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  margin: 10px 0;
+}
+
+.slider-text .bottom-scroll::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
+  transition: background 0.3s ease;
+}
+
+.slider-text .bottom-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.7);
+}
+
+/* Firefox scrollbar */
+.slider-text .bottom-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.5) rgba(255, 255, 255, 0.1);
+}
+
 
 /* PAGE SWITCH ANIMATION */
 .page {
@@ -554,8 +656,13 @@ nav a:hover::after {
 }
 
 @keyframes trainMove {
-  from { transform: translateX(0); }
-  to { transform: translateX(-100%); }
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-100%);
+  }
 }
 
 /* ================= ACTIVITIES GALLERY ================= */
@@ -574,13 +681,13 @@ nav a:hover::after {
   border-radius: 10px;
   cursor: pointer;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
 }
 
 /* HOVER EFFECT */
 .activities-gallery img:hover {
   transform: scale(1.05);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
 }
 
 /* ================= GALLERY STYLES ================= */
@@ -642,9 +749,11 @@ nav a:hover::after {
     opacity: 0;
     transform: scale(0.7) translateY(30px);
   }
+
   50% {
     transform: scale(1.05);
   }
+
   100% {
     opacity: 1;
     transform: scale(1) translateY(0);
@@ -660,6 +769,7 @@ nav a:hover::after {
     opacity: 0;
     transform: rotateY(90deg) scale(0.5);
   }
+
   100% {
     opacity: 1;
     transform: rotateY(0) scale(1);
@@ -675,6 +785,7 @@ nav a:hover::after {
     opacity: 0;
     transform: translateX(-100px) scale(0.9);
   }
+
   100% {
     opacity: 1;
     transform: translateX(0) scale(1);
@@ -690,6 +801,7 @@ nav a:hover::after {
     opacity: 0;
     transform: translateX(100px) scale(0.9);
   }
+
   100% {
     opacity: 1;
     transform: translateX(0) scale(1);
@@ -705,10 +817,12 @@ nav a:hover::after {
     opacity: 0;
     transform: scale(0) translateY(-20px);
   }
+
   50% {
     opacity: 1;
     transform: scale(1.1);
   }
+
   100% {
     opacity: 1;
     transform: scale(1) translateY(0);
@@ -731,6 +845,7 @@ nav a:hover::after {
     opacity: 0;
     transform: translateY(-10px);
   }
+
   100% {
     opacity: 1;
     transform: translateY(0);
@@ -845,7 +960,7 @@ nav a.active {
   background: white;
   padding: 30px;
   border-radius: 14px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
   width: 100%;
   max-width: 450px;
   border: 2px solid #0f5c45;
@@ -880,13 +995,13 @@ nav a.active {
   background: #0f5c45;
   color: white;
   transform: translateY(-2px);
-  box-shadow: 0 6px 15px rgba(15,92,69,0.3);
+  box-shadow: 0 6px 15px rgba(15, 92, 69, 0.3);
 }
 
 .amount-btn.selected {
   background: #0f5c45;
   color: white;
-  box-shadow: 0 6px 15px rgba(15,92,69,0.3);
+  box-shadow: 0 6px 15px rgba(15, 92, 69, 0.3);
 }
 
 .custom-amount {
@@ -936,7 +1051,7 @@ nav a.active {
 }
 
 .donate-btn:hover {
-  box-shadow: 0 10px 25px rgba(15,92,69,0.4);
+  box-shadow: 0 10px 25px rgba(15, 92, 69, 0.4);
   transform: translateY(-2px);
 }
 
@@ -982,6 +1097,126 @@ nav a.active {
   color: #0f5c45;
   font-size: 16px;
   margin-bottom: 5px;
+}
+
+/* ================= NCC RECRUITMENT FORM STYLES ================= */
+.form-page-container {
+  max-width: 900px;
+  margin: 30px auto;
+  padding: 0 20px;
+}
+
+.ncc-form {
+  background: white;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  border: 2px solid #0f5c45;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  color: #333;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.form-group .required {
+  color: #e74c3c;
+  font-weight: bold;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  font-size: 14px;
+  font-family: inherit;
+  transition: all 0.3s ease;
+  background: #fff;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #0f5c45;
+  box-shadow: 0 0 0 3px rgba(15, 92, 69, 0.1);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.checkbox-group {
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: flex-start;
+  cursor: pointer;
+  color: #666;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.checkbox-label input {
+  width: 18px;
+  height: 18px;
+  margin-right: 10px;
+  margin-top: 2px;
+  cursor: pointer;
+  accent-color: #0f5c45;
+  flex-shrink: 0;
+}
+
+.form-submit-btn {
+  width: 100%;
+  padding: 18px 30px;
+  background: linear-gradient(90deg, #0f5c45, #1e8f6f);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 20px;
+  display: block;
+  box-shadow: 0 4px 15px rgba(15, 92, 69, 0.2);
+}
+
+.form-submit-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(15, 92, 69, 0.4);
+  background: linear-gradient(90deg, #1e8f6f, #0f5c45);
+}
+
+.form-submit-btn:active {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(15, 92, 69, 0.3);
 }
 
 @media (max-width: 768px) {
@@ -1050,6 +1285,15 @@ nav a.active {
     padding: 0;
   }
 
+  /* Mobile scrollbar */
+  *::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  * {
+    scrollbar-width: thin;
+  }
+
   body {
     font-size: 14px;
   }
@@ -1066,32 +1310,143 @@ nav a.active {
     min-width: 200px;
   }
 
+  /* Mobile Menu Overlay */
+  .menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 999;
+    pointer-events: none;
+    backdrop-filter: blur(2px);
+  }
+
+  header.menu-open ~ .menu-overlay,
+  .menu-overlay.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: all;
+  }
+
   nav {
-    display: none;
+    display: flex;
     flex-direction: column;
-    position: absolute;
-    top: 60px;
-    right: 10px;
-    background: #0f5c45;
-    padding: 15px;
-    border-radius: 8px;
-    min-width: 180px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    gap: 10px;
-    z-index: 1001;
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 280px;
+    max-width: 85%;
+    height: 100vh;
+    background: linear-gradient(180deg, #0f5c45 0%, #1e8f6f 100%);
+    padding: 80px 20px 20px 20px;
+    box-shadow: 4px 0 30px rgba(0, 0, 0, 0.4);
+    gap: 0;
+    z-index: 1000;
+    overflow-y: auto;
+    transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 0 16px 16px 0;
+    will-change: left;
   }
 
   nav a {
     margin: 0;
-    padding: 10px 0;
-    font-size: 14px;
+    margin-bottom: 8px;
+    padding: 16px 18px;
+    font-size: 15px;
     color: white;
     text-align: left;
     display: block;
+    width: 100%;
+    border-radius: 8px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
+    transform: translateX(-20px);
+    font-weight: 500;
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+  header.menu-open nav a {
+    animation: slideInLeft 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  nav a:nth-child(2) { animation-delay: 0.05s; }
+  nav a:nth-child(3) { animation-delay: 0.1s; }
+  nav a:nth-child(4) { animation-delay: 0.15s; }
+  nav a:nth-child(5) { animation-delay: 0.2s; }
+  nav a:nth-child(6) { animation-delay: 0.25s; }
+  nav a:nth-child(7) { animation-delay: 0.3s; }
+  nav a:nth-child(8) { animation-delay: 0.35s; }
+  nav a:nth-child(9) { animation-delay: 0.4s; }
+  nav a:nth-child(10) { animation-delay: 0.45s; }
+  nav a:nth-child(11) { animation-delay: 0.5s; }
+  nav a:nth-child(12) { animation-delay: 0.55s; }
+
+  nav a::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 3px;
+    height: 100%;
+    background: white;
+    transform: scaleY(0);
+    transition: transform 0.3s ease;
+  }
+
+  nav a:hover,
+  nav a:active {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateX(8px);
+    padding-left: 22px;
+  }
+
+  nav a:hover::before,
+  nav a:active::before {
+    transform: scaleY(1);
+  }
+
+  @keyframes slideInLeft {
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
   }
 
   header.menu-open nav {
-    display: flex !important;
+    left: 0;
+  }
+
+  /* Close button for mobile menu */
+  .menu-close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: white;
+    font-size: 28px;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    z-index: 1001;
+    border: none;
+    padding: 0;
+  }
+
+  .menu-close-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: rotate(90deg) scale(1.1);
   }
 
   .menu-toggle {
@@ -1142,6 +1497,20 @@ nav a.active {
 
   .slides img {
     height: 280px;
+  }
+
+  .slider-text {
+    padding: 15px;
+  }
+
+  .slider-text .bottom-scroll {
+    max-height: calc(280px - 100px);
+    max-width: 95%;
+    padding-right: 10px;
+  }
+
+  .slider-text .bottom-scroll::-webkit-scrollbar {
+    width: 6px;
   }
 
   .slider-text h2 {
@@ -1309,6 +1678,37 @@ nav a.active {
     border-radius: 8px;
   }
 
+  /* FORM PAGE MOBILE */
+  .form-page-container {
+    padding: 0 15px;
+    margin: 20px auto;
+  }
+
+  .ncc-form {
+    padding: 25px 20px;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .form-group {
+    margin-bottom: 18px;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+
+  .form-submit-btn {
+    padding: 14px;
+    font-size: 14px;
+  }
+
   /* FORM CONTAINERS */
   .form-container {
     gap: 15px;
@@ -1333,7 +1733,13 @@ nav a.active {
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 500x) {
+
+  /* Small mobile scrollbar */
+  *::-webkit-scrollbar {
+    width: 5px;
+  }
+
   header {
     padding: 8px;
   }
@@ -1411,6 +1817,20 @@ nav a.active {
     height: 200px;
   }
 
+  .slider-text {
+    padding: 10px;
+  }
+
+  .slider-text .bottom-scroll {
+    max-height: calc(200px - 80px);
+    max-width: 98%;
+    padding-right: 8px;
+  }
+
+  .slider-text .bottom-scroll::-webkit-scrollbar {
+    width: 5px;
+  }
+
   .slider-text h2 {
     font-size: 16px;
   }
@@ -1433,4 +1853,578 @@ nav a.active {
     width: 100px;
     height: 100px;
   }
+}
+
+/* ================= LOGIN USER INFO ================= */
+.welcome-user {
+  font-size: 13px;
+  font-weight: 600;
+  color: #ffffff;
+  margin-left: 10px;
+  opacity: 0.9;
+}
+
+/* ================= SLIDER TEXT CENTERED ================= */
+
+.slider-text {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  color: #ffffff;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* 🔥 CENTER VERTICALLY */
+  align-items: center;
+
+  text-align: center;
+  padding: 20px;
+}
+
+.slider-text .top-fixed {
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.slider-text h2 {
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.3;
+  margin-bottom: 10px;
+}
+
+.slider-text p {
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+@media (max-width: 768px) {
+  .slider-text h2 {
+    font-size: 22px;
+  }
+
+  .slider-text p {
+    font-size: 14px;
+  }
+}
+
+
+
+
+/* ================= DONATION PROMO (HOME PAGE ONLY) ================= */
+
+#home .donation-promo {
+  background: #ffffff;
+  padding: 50px 20px;
+}
+
+#home .donation-promo-container {
+  max-width: 1100px;
+  margin: auto;
+  display: flex;
+  gap: 30px;
+  align-items: stretch;
+}
+
+/* TEXT – LEFT (HOME ONLY) */
+#home .donation-content {
+  flex: 1;
+  order: 1;
+  color: #1c2b28;
+  text-align: left;
+}
+
+/* IMAGE – RIGHT (HOME ONLY) */
+#home .donation-image {
+  flex: 1;
+  order: 2;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+#home .donation-image img {
+  width: 100%;
+  height: auto;
+  max-height: 100%;
+  object-fit: cover;
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+#home .donation-content h2 {
+  margin-bottom: 15px;
+  color: #0f5c45;
+}
+
+#home .donation-content p {
+  line-height: 1.7;
+  margin-bottom: 14px;
+  color: #333;
+}
+
+#home .donation-contact {
+  margin-top: 10px;
+  color: #0f5c45;
+}
+
+/* ================= MOBILE – HOME ONLY ================= */
+
+@media (max-width: 768px) {
+  #home .donation-promo-container {
+    flex-direction: column;
+  }
+
+  #home .donation-content {
+    text-align: left;
+  }
+}
+
+/* =========================================================
+   HOME PAGE – DONATION SECTION (PREMIUM TYPOGRAPHY & COLORS)
+   Scoped ONLY to Home page
+========================================================= */
+
+#home .donation-content {
+  font-family: 'Times New Roman', Times, serif;
+  max-width: 95%;
+  text-align: left;
+}
+
+/* ---------------- MAIN HEADING ---------------- */
+#home .donation-content h2 {
+  font-size: 40px;
+  font-weight: 900;
+  line-height: 1.3;
+  letter-spacing: 0.3px;
+  margin-bottom: 22px;
+  color: #0f5c45;
+  /* Strong trust green */
+}
+
+/* ---------------- INTRO PARAGRAPH (ATTENTION GRABBER) ---------------- */
+#home .donation-content p:first-of-type {
+  font-size: 25px;
+  font-weight: 500;
+  line-height: 1;
+  color: #2a7a63;
+  /* Soft highlighted green */
+  margin-bottom: 22px;
+}
+
+/* ---------------- MAIN BODY PARAGRAPHS ---------------- */
+#home .donation-content p {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1;
+  color: #313030;
+  /* Premium dark gray for readability */
+  margin-bottom: 22px;
+}
+
+/* ---------------- IMPORTANT / EMOTIONAL LINE (LAST PARA) ---------------- */
+#home .donation-content p:last-of-type {
+
+  font-weight: 500;
+  color: #1f4f3f;
+  /* Deeper green for emotional close */
+}
+
+/* ---------------- CONTACT LINE ---------------- */
+#home .donation-contact {
+  margin-top: 26px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #0f5c45;
+}
+
+
+
+/* =========================================================
+   MOBILE RESPONSIVE – HOME ONLY
+========================================================= */
+
+@media (max-width: 768px) {
+  #home .donation-content {
+    border-left: none;
+    padding-left: 0;
+  }
+
+  #home .donation-content h2 {
+    font-size: 25px;
+  }
+
+  #home .donation-content p {
+    font-size: 14.8px;
+    line-height: 1.75;
+  }
+
+  #home .donation-content p:first-of-type {
+    font-size: 15.5px;
+  }
+}
+
+/* =====================================================
+   JOBS SECTION – PERFECT FIT LIKE IMAGE
+===================================================== */
+
+.jobs-recruit-home {
+  background: #ffffff;
+  padding: 60px 20px;
+}
+
+.jobs-recruit-container {
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 60px;
+}
+
+/* ---------------- LEFT IMAGE ---------------- */
+.jobs-left {
+  flex: 0 0 48%;
+  text-align: center;
+}
+
+.jobs-left img {
+  width: 100%;
+  max-width: 520px;        /* 🔥 prevents oversize */
+  height: auto;
+  object-fit: contain;
+  border-radius: 16px;
+  box-shadow: 0 14px 35px rgba(0,0,0,0.18);
+}
+
+/* APPLY NOW BUTTON */
+.jobs-left .apply-btn {
+  margin-top: 22px;
+}
+
+/* ---------------- RIGHT TEXT ---------------- */
+.jobs-right {
+  flex: 0 0 48%;
+  text-align: left;
+  font-size: 32px;
+  color: #1e3f8f;
+  margin-top: -140px;
+}
+
+/* BLUE TEXT – ONE LINE LIKE IMAGE */
+.jobs-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: #1e3f8f;
+  white-space: nowrap;     /* 🔥 one line */
+  margin-bottom: 22px;
+}
+
+/* INFO BUTTON */
+.jobs-right .info-btn {
+  margin-top: 10px;
+}
+
+/* =====================================================
+   RESPONSIVE FIT
+===================================================== */
+
+/* LAPTOP */
+@media (max-width: 1200px) {
+  .jobs-title {
+    font-size: 28px;
+  }
+
+  .jobs-left img {
+    max-width: 480px;
+  }
+}
+
+/* TABLET */
+@media (max-width: 992px) {
+  .jobs-recruit-container {
+    gap: 35px;
+  }
+
+  .jobs-title {
+    font-size: 24px;
+  }
+
+  .jobs-left img {
+    max-width: 420px;
+  }
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .jobs-recruit-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .jobs-left,
+  .jobs-right {
+    flex: 100%;
+  }
+
+  .jobs-right {
+    text-align: center;
+  }
+
+  .jobs-title {
+    font-size: 150px;
+       /* allow wrap ONLY on mobile */
+  }
+
+  .jobs-left img {
+    max-width: 100%;
+  }
+}
+
+  .jobs-right {
+    margin-top: -20px;   /* 🔥 pushes text down */
+  }
+
+  .jobs-left .apply-btn {
+    margin-bottom: -20px;  /* 🔥 space between image button and text */
+  }
+
+
+/* SMALL MOBILE */
+@media (max-width: 480px) {
+  .jobs-title {
+    font-size: 18px;
+  }
+}
+
+/* =========================================
+   MAKE BUTTONS BIG & ATTRACTIVE
+========================================= */
+
+.apply-btn,
+.info-btn {
+  padding: 18px 42px;     /* 🔥 makes button BIG */
+  font-size: 18px;        /* 🔥 larger text */
+  min-width: 260px;       /* 🔥 same wide size */
+  font-weight: 600;
+  background: linear-gradient(135deg, #0f5c45 0%, #1e8f6f 100%);
+  color: white;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  text-transform:capitalize;
+  border-radius: 50px;
+  border: none;
+}
+
+/* Hover – clean & professional */
+.apply-btn:hover,
+.info-btn:hover {
+  background: #0f5c45;
+  border: none;
+}
+
+.divider {
+  border: none;              /* remove default double line */
+  height: 1px;               /* thickness */
+  background: #1F5F3A;       /* your site green */
+  margin: 50px auto;         /* spacing */
+  width: 100%;                /* centered */
+}
+
+/* =====================================================
+   VOLUNTEER SECTION – PERFECT FIT LIKE IMAGE
+===================================================== */
+
+.volunteer-recruit-home {
+  background: #ffffff;
+  padding: 60px 20px;
+}
+
+.volunteer-recruit-container {
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 60px;
+}
+
+/* ---------------- LEFT IMAGE ---------------- */
+.volunteer-right {
+  flex: 0 0 48%;
+  text-align: center;
+}
+
+.volunteer-right img {
+  width: 100%;
+  max-width: 520px;        /* 🔥 prevents oversize */
+  height: auto;
+  object-fit: contain;
+  border-radius: 16px;
+  box-shadow: 0 14px 35px rgba(0,0,0,0.18);
+}
+
+/* APPLY NOW BUTTON */
+.volunteer-right .apply-btn {
+  margin-top: 22px;
+}
+
+/* Register Now button spacing in Volunteer page */
+#volunteer .apply-btn {
+  margin-top: 30px;
+}
+
+/* ---------------- RIGHT TEXT ---------------- */
+.volunteer-left {
+  flex: 0 0 48%;
+  text-align: left;
+  font-size: 32px;
+  color: #1e3f8f;
+  margin-top: -10px;
+}
+
+/* INFO BUTTON */
+.volunteer-left .info-btn {
+  margin-top: 10px;
+}
+
+/* =====================================================
+   RESPONSIVE FIT
+===================================================== */
+
+/* LAPTOP */
+@media (max-width: 1200px) {
+  .volunteer-title {
+    font-size: 28px;
+  }
+
+  .volunteer-right img {
+    max-width: 480px;
+  }
+}
+
+/* TABLET */
+@media (max-width: 992px) {
+  .volunteer-recruit-container {
+    gap: 35px;
+  }
+
+  .volunteer-title {
+    font-size: 24px;
+  }
+
+  .volunteer-right img {
+    max-width: 420px;
+  }
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .volunteer-recruit-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .volunteer-right,
+  .volunteer-left {
+    flex: 100%;
+  }
+
+  .volunteer-right {
+    text-align: center;
+  }
+
+  .volunteer-right img {
+    max-width: 100%;
+  }
+}
+
+/* SMALL MOBILE */
+@media (max-width: 480px) {
+  .volunteer-title {
+    font-size: 18px;
+  }
+}
+
+/* =========================================
+   MAKE BUTTONS BIG & ATTRACTIVE
+========================================= */
+
+.volunteer-btn,
+.info-btn {
+  padding: 18px 42px;     /* 🔥 makes button BIG */
+  font-size: 18px;        /* 🔥 larger text */
+  min-width: 260px;       /* 🔥 same wide size */
+  font-weight: 600;
+  background: linear-gradient(135deg, #0f5c45 0%, #1e8f6f 100%);
+  color: white;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  text-transform:capitalize;
+  border-radius: 50px;
+  border: none;
+}
+
+/* Hover – clean & professional */
+.volunteer-btn:hover,
+.info-btn:hover {
+  background: #0f5c45;
+  border: none;
+}
+
+.divider {
+  border: none;              /* remove default double line */
+  height: 1px;               /* thickness */
+  background: #1F5F3A;       /* your site green */
+  margin: 50px auto;         /* spacing */
+  width: 100%;                /* centered */
+}
+
+/* 🔁 Swap sides: Text on LEFT, Image on RIGHT */
+.volunteer-left {
+  order: 1;   /* move text to left */
+}
+
+.volunteer-right {
+  order: 2;   /* move image to right */
+}
+
+.donation-image{
+    display: flex;
+    flex-direction: column;   /* stack vertically */
+    align-items: center;      /* center everything */
+}
+
+.donation-image img{
+    width: 100%;
+    max-width: 520px;
+    display: block;
+}
+
+.donation-btn{
+     
+    color: white !important;
+
+    margin-top: 18px;
+    padding: 14px 200px;
+
+    font-size: 22px;
+    font-weight: bold;
+
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    background: linear-gradient(135deg, #7a0c0c 0%, #5c0808 100%);
+}
+
+
+.donate-btn:hover
+.info-btn:hover{
+    background-color: #5c0808;   /* darker maroon */
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+     /* little zoom */
+    
+
 }
