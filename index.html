@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Agni Rural Welfare Society</title>
@@ -9,362 +10,851 @@
 
 <body>
 
-<!-- ================= LOGIN / REGISTER ================= -->
-<div id="authSection" class="auth-wrapper">
+  <!-- ================= LOGIN / REGISTER ================= -->
+  <div id="authSection" class="auth-wrapper" style="display:none;">
 
-  <div class="auth-container">
-    <div class="auth-header">
+    <div class="auth-container">
+      <div class="auth-header">
+        <h1>Agni Rural Welfare Society</h1>
+        <p class="subtitle">Serving Society with Responsibility</p>
+      </div>
+
+      <!-- Tab Navigation -->
+      <div class="auth-tabs">
+        <button class="tab-btn active" onclick="switchTab('login')">Login</button>
+        <button class="tab-btn" onclick="switchTab('register')">Register</button>
+      </div>
+
+      <!-- Login Form -->
+      <form id="loginForm" class="auth-form active">
+        <h2>Welcome Back</h2>
+        <p class="form-subtitle">Sign in to your account</p>
+
+        <div class="form-group">
+          <label for="loginUser">Username</label>
+          <input type="text" id="loginUser" placeholder="Enter your username">
+        </div>
+
+        <div class="form-group password-group">
+          <label for="loginPass">Password</label>
+          <div class="password-input-wrapper">
+            <input type="password" id="loginPass" placeholder="Enter your password">
+            <button type="button" class="password-toggle" onclick="togglePassword('loginPass')">👁️</button>
+          </div>
+        </div>
+
+        <button type="button" onclick="login()" class="auth-button">Sign In</button>
+
+        <div class="form-footer">
+          <label class="remember-me">
+            <input type="checkbox"> Remember me
+          </label>
+        </div>
+      </form>
+
+      <!-- Register Form -->
+      <form id="registerForm" class="auth-form">
+        <h2>Create Account</h2>
+        <p class="form-subtitle">Join our mission today</p>
+
+        <div class="form-group">
+          <label for="registerName">Full Name</label>
+          <input type="text" id="registerName" placeholder="Enter your full name">
+        </div>
+
+        <div class="form-group">
+          <label for="registerEmail">Email</label>
+          <input type="email" id="registerEmail" placeholder="Enter your email">
+        </div>
+
+        <div class="form-group password-group">
+          <label for="registerPass">Password</label>
+          <div class="password-input-wrapper">
+            <input type="password" id="registerPass" placeholder="Create a password">
+            <button type="button" class="password-toggle" onclick="togglePassword('registerPass')">👁️</button>
+          </div>
+        </div>
+
+        <div class="form-group password-group">
+          <label for="registerConfirm">Confirm Password</label>
+          <div class="password-input-wrapper">
+            <input type="password" id="registerConfirm" placeholder="Confirm your password">
+            <button type="button" class="password-toggle" onclick="togglePassword('registerConfirm')">👁️</button>
+          </div>
+        </div>
+
+        <button type="button" onclick="register()" class="auth-button">Create Account</button>
+
+        <div class="form-footer">
+          <label class="terms-agree">
+            <input type="checkbox" required> I agree to the terms and conditions
+          </label>
+        </div>
+      </form>
+    </div>
+
+    <div class="auth-side-decoration">
+      <div class="decoration-circle decoration-1"></div>
+      <div class="decoration-circle decoration-2"></div>
+      <div class="decoration-circle decoration-3"></div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay">
+      <div class="loading-container">
+        <div class="spinner"></div>
+        <p class="verifying-text">Verifying</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ================= WEBSITE ================= -->
+  <div id="website">
+
+    <!-- Mobile Menu Overlay -->
+    <div id="menuOverlay" class="menu-overlay" onclick="closeMenu()"></div>
+
+    <header>
       <h1>Agni Rural Welfare Society</h1>
-      <p class="subtitle">Serving Society with Responsibility</p>
-    </div>
+      <span id="welcomeUser" class="welcome-user"></span>
+      <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+      <nav>
+        <button class="menu-close-btn" onclick="closeMenu()" aria-label="Close menu">✕</button>
+        <a onclick="showPage('home')">Home</a>
+        <!-- AUTH BUTTON -->
+        <a id="authBtn" onclick="openLogin()">Login</a>
+        <a onclick="showPage('about')">About Organization</a>
+        <a onclick="showPage('activities')">Activities</a>
+        <a onclick="showPage('jobs')">Jobs</a>
+        <a onclick="showPage('membership')">Membership</a>
+        <a onclick="showPage('volunteer')">Volunteer</a>
+        <a onclick="showPage('supporters')">Supporters</a>
+        <a onclick="showPage('gallery')">Gallery</a>
+        <a onclick="showPage('donate')">Donate</a>
+        <a onclick="showPage('contact')">Contact</a>
+      </nav>
 
-    <!-- Tab Navigation -->
-    <div class="auth-tabs">
-      <button class="tab-btn active" onclick="switchTab('login')">Login</button>
-      <button class="tab-btn" onclick="switchTab('register')">Register</button>
-    </div>
+    </header>
 
-    <!-- Login Form -->
-    <form id="loginForm" class="auth-form active">
-      <h2>Welcome Back</h2>
-      <p class="form-subtitle">Sign in to your account</p>
-      
-      <div class="form-group">
-        <label for="loginUser">Username</label>
-        <input type="text" id="loginUser" placeholder="Enter your username">
-      </div>
-      
-      <div class="form-group password-group">
-        <label for="loginPass">Password</label>
-        <div class="password-input-wrapper">
-          <input type="password" id="loginPass" placeholder="Enter your password">
-          <button type="button" class="password-toggle" onclick="togglePassword('loginPass')">👁️</button>
+    <section class="card">
+      <h3 id="welcomeText">Welcome</h3>
+    </section>
+
+
+    <!-- ================= HOME ================= -->
+    <section id="home" class="page active">
+      <div class="slider">
+        <div class="slides">
+          <img src="image51.jpg">
+          <img src="image1.jpg">
+          <img src="image3.jpg">
+          <img src="image4.jpg">
+          <img src="image1.jpg">
+          <img src="image4.jpg">
+          <img src="image3.jpg">
+          <img src="image20.jpg">
+          <img src="image56.jpg">
+          <img src="image57.jpg">
+          <img src="image58.jpg">
+          <img src="image59.jpg">
+          <img src="image60.jpg">
+          <img src="image61.jpg">
+          <img src="image62.jpg">
+          <img src="image63.jpg">
+          <img src="image64.jpg">
+          <img src="image65.jpg">
+          <img src="image52.jpg">
+        </div>
+        <div class="slider-text">
+          <div class="top-fixed">
+            <h2>Spreading Joy Through Social Service</h2>
+            <p>Working together for children, communities, and a better tomorrow.</p>
+          </div>
         </div>
       </div>
 
-      <button type="button" onclick="login()" class="auth-button">Sign In</button>
-      
-      <div class="form-footer">
-        <label class="remember-me">
-          <input type="checkbox"> Remember me
-        </label>
-      </div>
-    </form>
+      <!-- ================= DONATION PROMOTION SECTION ================= -->
+      <section class="donation-promo">
 
-    <!-- Register Form -->
-    <form id="registerForm" class="auth-form">
-      <h2>Create Account</h2>
-      <p class="form-subtitle">Join our mission today</p>
-      
-      <div class="form-group">
-        <label for="registerName">Full Name</label>
-        <input type="text" id="registerName" placeholder="Enter your full name">
+        <div class="donation-promo-container">
+
+          <!-- LEFT : IMAGE -->
+          <div class="donation-image ">
+            <img src="image53.jpg" alt="Agni Rural Welfare Society Donation">
+
+            <button class="donation-btn" onclick="showPage('donate')">
+              Donate Now
+            </button>
+          </div>
+
+
+
+
+          <!-- RIGHT : TEXT -->
+          <div class="donation-content">
+            <h2>Support Our Social Activities</h2>
+
+            <p>Support Sundarban poor School Students with New Clothes,study materials, portion food & others.</p>
+            <p>As we do every year, this time as well, AGNI Rural Welfare Society is proud to continue its tradition of
+              supporting the underprivileged by distributing new clothes to the students of Sundarbans poor School in
+              the. This initiative is part of our Social activities, a time when we aim to bring joy to these children
+              and ensure they feel included in the festive spirit. The smiles on their faces remind us of the importance
+              of community and compassion during this special occasion.</p>
+            <p>We are calling on generous individuals, organizations, and well-wishers who wish to contribute to this
+              cause. You can support these students by making a donation through our bank account or using the Bank QR
+              code provided. Your contributions will directly go towards purchasing new clothes for the students, many
+              of whom come from economically disadvantaged backgrounds and eagerly look forward to this time of the
+              year.</p>
+            <p>Together, we can make these social activities a memorable one for these students and give back to the
+              community in a meaningful way.</p>
+            <p>Thank you for your support and generosity!</p>
+
+
+            <p class="donation-contact">
+              <strong>Contact :</strong> 9433834013
+            </p>
+          </div>
+
+        </div>
+
+        <hr class="divider">
+
+        <!-- ================= JOBS RECRUITMENT HOME ================= -->
+        <section class="jobs-recruit-home">
+          <div class="jobs-recruit-container">
+
+            <!-- LEFT SIDE -->
+            <div class="jobs-left">
+              <img src="image54.jpg" alt="NCC Recruitment Poster">
+
+              <button class="job-btn apply-btn" onclick="showPage('nccForm')">
+                Apply Now
+              </button>
+            </div>
+
+            <!-- RIGHT SIDE -->
+            <div class="jobs-right">
+              <h2>Recruitment going on for</h2>
+
+              <p class="jobs-title">
+                NCC <span>‘C’</span> Pass Candidates:-
+              </p>
+
+              <button class="job-btn info-btn" onclick="showPage('jobs')">
+                Click here for more information
+              </button>
+            </div>
+
+          </div>
+        </section>
+
+        <hr class="divider">
+
+        <!-- ================= VOLUNTEER RECRUITMENT HOME ================= -->
+        <section class="volunteer">
+          <div class="volunteer-recruit-container">
+
+            <!-- LEFT SIDE -->
+            <div class="volunteer-right">
+              <img src="image55.jpg" alt="Volunteer Recruitment Poster">
+
+              <button class="volunteer-btn apply-btn" onclick="showPage('volunteer')">
+                Apply Now
+              </button>
+            </div>
+
+            <!-- RIGHT SIDE -->
+            <div class="volunteer-left">
+              <h2>NGO Fundraising & Field Coordinator</h2>
+
+              <button class="volunteer-btn info-btn" onclick="showPage('volunteer')">
+                Click here for more information
+              </button>
+            </div>
+          </div>
+        </section>
+
+      </section>
+    </section>
+
+
+    <!-- ================= ABOUT ================= -->
+    <section id="about" class="page">
+      <h2>About Organization</h2><br></br>
+      <p class="left">
+        <strong>AGNI RURAL WELFARE SOCIETY</strong>, a society of Social work organization.
+        <br></br>
+      </p>
+
+      <p class="left">
+        We beg to introduce ourselves as a non-government and non-profit organization working intensively in the semi
+        urban region of South 24 Parganas District of West Bengal. Our operational area is presently at Sonarpur Block
+        but ready to extend little broader region in the entire Baruipur sub division.
+        <br></br>
+      </p>
+
+      <p class="left">
+        This is for your kind inform that we started from the very beginning two day’s weekly Training Programme at
+        Sonarpur Mahavidyalaya play ground "Drill, Band, Physical training, sports, games, Obstacle Management, Disaster
+        Management, Civil Defence, NDA, IMA, OTA (Army, Navy, Air Force) examination & inspiration training". Our
+        primary aim is to cover the students belonging to Secondary & Higher Secondary schools within the jurisdiction
+        of Baruipur SDO & by the help of this programme the students will be highly benefited in all respects.
+        <br></br>
+      </p>
+
+      <p class="left">
+        We have much pleasure to inform you that we are started National Defense Academy Inspiration training (Army,
+        Navy & Air Force) UPSC examination preparation for school students at jurisdiction of Baruipur SDO. There are
+        many students who are not aware in this area about the Examination as per Indian army survey report. We, the
+        only organization have taken necessary measures to educate the students for preparation of National Defense
+        Academy (Army, Navy & Air Force) & UPSC examination for their bright career.
+        <br></br>
+      </p>
+
+      <p class="left">
+        Established on 22/09/2008. We started the process of getting some of the poor kids to be impaired for
+        brightening their aim. In 2009, there was a storm Aila in the south of the south 24 Parganas. Many people of the
+        Sundarbans, after losing another, clothes, water, water and habitat. To cope with this situation and to keep
+        them in mind, we and our organization's students collect relief materials from the area and deliver relief
+        material to the people of these flooded areas. Storm like Aila teaches many things in our lives. We then plan
+        that there is a need to tackle the crisis of emergency in all areas.
+        <br></br>
+      </p>
+
+      <p class="left">
+        Students, young people are troubled by many anti-social and cultural issues, and they are becoming addicted to
+        various forms and their education teachers and humanitarianism are being overthrown by the teachers and honor of
+        the elders. Due to the nonconformity, social norms among them are being lost day by day. They are becoming
+        physically and mentally weak, keeping them healthy and physically fit in the environment and making them reflect
+        in society through training.
+        <br></br>
+      </p>
+
+      <p class="left">
+        We did a survey in South 24 Parganas, which showed that some poor children are losing their parents' negligence.
+        They do not have any desire and plans like their future. Parents of these families can not give them the right
+        time, and many of them are nutritious A lack is seen In the absence of suitable food they are lagging behind
+        mental and physical development.
+        <br></br>
+      </p>
+
+      <p class="left">
+        In view of this, a special purpose was taken from our organization that a training camp was organized to tackle
+        one of the worst disaster situations for one and a half students in the sports premises of Sonarpur College in
+        front of Sonarpur BDO. We train students to collect some of them from the society, where the “Drill, Obstacle,
+        Pipe Band, Games, Self Defense, P.T, Disaster Management, sea explorer, Yoga, Telent hunt, Civil defense,
+        Grooming & Inspiration of join NDA, IMA, OTA (Indian Army, Navy, Air Force) examination etc” Give training
+        Creating a goal among them that they will be in the future.
+        <br></br>
+      </p>
+
+      <p class="left">
+        These students and their parents can not send them any day or outside as they are not able to do so. We take
+        them to camp for 10 days each year on school holidays every day, so that their old-minded reading is not wasted,
+        time is spent on training and singing about their hills or the ocean areas.
+        <br></br>
+      </p>
+
+      <p class="left">
+        One of our little efforts is to make them healthy, strong, emotionally, physically, and socially trained by
+        them. By introducing them to various welfare social services and spreading their socialism.
+        <br></br>
+      </p>
+
+      <p class="left"><strong>We are working with various type of social welfare activities, such as:</strong><br></br>
+      </p>
+
+      <ul class="left">
+        <li>1. Cloth (Bastra) Distribution.</li>
+        <li>2. Health & Sanitation awareness.</li>
+        <li>3. Buyer and consumer protection and awareness.</li>
+        <li>4. World Environment Day.</li>
+        <li>5. Football Competition.</li>
+        <li>6. Relief goods to reach the people at flooded area.</li>
+        <li>7. Plant implants.</li>
+        <br></br>
+      </ul>
+
+      <p class="left">
+        We also observed, Biswa Kabi Guru Rabindranath, Poet Kazi Nazrul Islam, the Father of the Nation Mahatma Gandhi
+        Jayanti. Shaheed Kshudiram, Ex-president and distinguished scientific Dr. Kalam, Netaji Subhash Chandra Bose and
+        the Swami Vivekananda’s birthday also observed.
+        <br></br>
+      </p>
+
+      <p class="left">
+        Republic Day Celebration. Co-operate with Financially Backward Students. Winter clothing distribution
+        Anesthesia. Drill, Obstacle, Pipe Band, Games, Self Defense, PT, Disaster Management, sea explorer, Yoga, Telent
+        hunt, Civil defense, Grooming & Inspiration of join NDA, IMA, OTA (Indian Army, Navy, Air Force) examination on
+        the day of Yoga training. International Yoga Day. 1st Baishakh celebrate. etc etc
+        <br></br>
+      </p>
+
+      <p class="left">
+        In this era, the youth and the student community are being overwhelmed by a superstitious, uneasy condition. By
+        establishing them in a healthy society through such a program, we have a small effort.
+        <br></br>
+      </p>
+
+      <p class="left">
+        We are thinking of the academy in the future for an NDA where the students will be in a healthy entry and they
+        will have the right to be trained in education and various remedies where they can have a healthy society.
+        <br></br>
+      </p>
+
+      <p class="left">
+        So we are kind of you that we should extend our cooperation to our organization so that these students can shine
+        their future with your help.
+        <br></br>
+      </p>
+    </section>
+
+    <!-- ================= ACTIVITIES ================= -->
+    <section id="activities" class="page">
+      <h2>Our Social Activities</h2>
+      <p class="center-text">
+        As part of our ongoing social initiatives, Agni Rural Welfare Society supports poor
+        school students in the Sundarbans by providing new clothes, study materials, portion food,
+        and essential items.
+      </p>
+      <p class="center-text">
+        These activities aim to bring joy, dignity, and a sense of inclusion to children from
+        economically disadvantaged backgrounds.
+      </p>
+
+      <div class="activities-gallery">
+        <img src="image5.jpg">
+        <img src="image6.jpg">
+        <img src="image7.jpg">
+        <img src="image8.jpg">
+        <img src="image9.jpg">
+        <img src="image10.jpg">
+      </div>
+    </section>
+
+    <!-- ================= JOBS ================= -->
+    <section id="jobs" class="page">
+      <h2>Job Vacancy – NCC Trainers</h2>
+      <p class="center-text">
+        Agni Rural Welfare Society (NGO) invites applications for full-time Trainer / Drill
+        Instructor roles under our NGO training projects.
+      </p>
+      <p class="center-text">
+        Training areas include Drill, Band, Physical Training, Sports, Obstacle Management,
+        Disaster Management, Civil Defence, and preparation for NDA, IMA, OTA (Indian Army,
+        Navy, Air Force) examinations.
+      </p>
+      <p class="center-text">
+        Interested candidates may send their CV or Resume with photograph via WhatsApp.
+      </p>
+      <div class="center-img">
+        <img src="image13.png" alt="jobs"><br></br>
+      </div>
+      <h3>Dear Cadets, <br></br></h3>
+      <p class="left">
+        We beg to introduce ourselves as a non-governmental and non-profit organization working extensively in the
+        semi-urban and rural regions of West Bengal. At present, our operational area is the Sonarpur Block; however, we
+        are prepared to expand our activities across the entire state. Since Cyclone Aila in 2009 and the subsequent
+        devastation in the Sundarbans, we have been actively involved in social welfare activities in districts such as
+        South 24 Parganas, Midnapore, Darjeeling, and Kalimpong.<br></br>
+      </p>
+      <p class="left">
+        We are pleased to inform you that we conduct regular training camps every Saturday and Sunday, covering
+        activities such as Drill, Physical Training, Marching Band, Obstacle Management, Sports and Games, Cultural
+        Activities, Yoga, Wrestling, Disaster Management, Motivation and Personality Grooming, Screening, and Awareness
+        Training for NDA, IMA, and OTA (Indian Army, Navy, and Air Force) examinations. These camps are held at Sonarpur
+        Mahavidyalaya Playground and Rajpur Agami Playground from 6:20 AM to 10:30 AM.<br></br>
+      </p>
+      <p class="left">
+        Several schools have approached us requesting support in conducting such training programs at their
+        institutions, as most schools lack qualified teachers or trainers for these activities. In response, some
+        schools have formally requested us to provide trainers, at least for drill training.<br></br>
+      </p>
+      <p class="left">
+        To meet this growing demand, we are planning to launch a six-month paid internship programme in which we intend
+        to engage NCC ‘C’ Certificate holder cadets who can provide training in one school per week. During the
+        internship period, interns will receive a stipend ranging from Rs.1,000 to Rs.2,000 per month. Upon successful
+        completion of the six months and fulfillment of our performance criteria, selected candidates may be offered a
+        salary in the range of Rs.15,000 to Rs.18,000 per month.<br></br>
+      </p>
+      <p class="left">
+        We would be highly grateful if you could kindly nominate or recommend suitable NCC ‘C’ Certificate holder cadets
+        who have an interest in social work and possess the ability to conduct the above-mentioned training programs.
+        Criteria for Boys & Girls Candidates:<br></br>
+        1. Minimum qualification: Graduate (Passed)<br></br>
+        2. NCC ‘C’ Certificate holder<br></br>
+        3. Basic knowledge of Disaster Management and NDA/IMA/OTA (Indian Army, Navy, Air Force) examinations.<br></br>
+        4. Resident of Kolkata or South 24 Parganas<br></br>
+        5. Age: Minimum 19 years and maximum 25 years<br></br>
+        6. Six-month paid internship programme<br></br>
+        Nature of Work during Internship:<br></br>
+        • Conduct drill training in schools at least once a week (minimum four days per month)
+        • Assist in other NGO activities, subject to capability, such as Project Research, Analysis,Fundraising,
+        Content<br></br>
+        Writing, Budget Preparation, and Field Implementation Remuneration:<br></br>
+        • Stipend during internship: Rs.1,000 – Rs.2,000 per month (After providing appointment letter)
+        • Salary after successful completion and task fulfillment (which are mentioned above): Rs.10,000 – Rs.18,000 per
+        month
+      </p>
+      <p>
+        Interested cadets may send their CV/Biodata/Resume along with a recent photograph and a copy of the NCC ‘C’
+        Certificate via email or WhatsApp at the contact details given below:<br></br>
+        Email : arws008@gmail.com<br></br>
+        WhatsApp : +91 94338 34013<br></br>
+        We look forward to your kind cooperation and support.<br></br>
+        Thanking you.<br>
+        Yours sincerely,<br>
+        Dipankar Lahiri<br>
+        Secretary<br></br>
+        Contact : 9831460161/9433834013
+      </p>
+    </section>
+
+    <!-- ================= MEMBERSHIP ================= -->
+    <section id="membership" class="page">
+      <h2>Become a Member</h2>
+      <p class="center-text">
+        Membership at Agni Rural Welfare Society is for social service and social responsibility.
+        It is not intended for political or profit-making purposes.
+      </p>
+      <p class="center-text">
+        Members are encouraged to actively participate in service activities or indirectly
+        support the organization’s welfare initiatives.
+      </p>
+
+      <div class="center-img">
+        <img src="image12.png" alt="Membership Criteria">
       </div>
 
-      <div class="form-group">
-        <label for="registerEmail">Email</label>
-        <input type="email" id="registerEmail" placeholder="Enter your email">
+      <p class="center-text">
+        <strong>Benefits of Membership:</strong><br>
+        Members are invited to participate in various activities and events organized by
+        Agni Rural Welfare Society.<br>
+        <em>Terms & Conditions Apply.</em>
+      </p>
+    </section>
+
+    <!-- ================= VOLUNTEER ================= -->
+    <section id="volunteer" class="page">
+      <h2>Join as a Volunteer</h2>
+      <p class="center-text">
+        Volunteering with Agni Rural Welfare Society is an opportunity to engage in meaningful
+        social service and contribute to community welfare.
+      </p>
+      <p class="center-text">
+        Volunteers play an important role in supporting activities, outreach programs, and
+        service initiatives.
+      </p>
+      <h2>NGO Fundraising & Field Coordinator</h2>
+
+      <p class="center-text"><strong>Volunteer & Internship Programme (Only for Kolkata)</strong></p>
+
+      <p class="left">
+        Agni Rural Welfare Society is planning a social welfare initiative in February, where we will distribute new
+        clothes,
+        notebooks, pens, pencils, educational materials, and other essentials to underprivileged children and students
+        across
+        nearly 20 villages in the Sundarbans.
+      </p>
+
+      <p class="left">
+        🎯 To make this mission successful, we are inviting kind-hearted and motivated <strong>Volunteers &
+          Interns</strong>
+        to join hands with us in this noble cause.
+      </p>
+
+      <hr>
+
+      <h3>🔍 Internship / Volunteer Role Details</h3>
+
+      <p class="left"><strong>Position:</strong> NGO Fundraising & Field Coordinator (Volunteer / Intern)</p>
+      <p class="left"><strong>Duration:</strong> 6 Months Internship</p>
+      <p class="left"><strong>Location:</strong> Kolkata (Field-based activities)</p>
+
+      <hr>
+
+      <h3>🛠 Key Responsibilities</h3>
+
+      <ul class="left">
+        <li>1. Fundraising activities (Face-to-Face, Data Creation, Data Calling, etc.)</li>
+        <li>2. Field activities such as fundraising camps in residential complexes, companies, and other locations</li>
+        <li>3. Building strong relationships and connectivity with donors</li>
+        <li>4. Increasing overall fundraising support</li>
+        <li>5. Social media marketing (Facebook, Twitter, LinkedIn, YouTube, Instagram, etc.)</li>
+        <li>6. Supporting other NGO activities as required</li>
+      </ul>
+
+      <hr>
+
+      <h3>💰 Compensation & Benefits</h3>
+
+      <ul class="left">
+        <li>1. Monthly Stipend: ₹1,000 – ₹2,000 (Terms & Conditions Apply)</li>
+        <li>2. Minimum Fundraising Target: ₹20,000 during internship period</li>
+        <li>
+          3. Completion Benefit: Candidates who successfully complete the 6-month internship will be eligible for
+          placement
+          within our organization
+          <ul>
+            <li>a. Starting Salary: ₹20,000 – ₹35,000 per month</li>
+            <li>b. Additional Benefits: Incentives, Rewards & Recognition</li>
+          </ul>
+        </li>
+      </ul>
+
+      <hr>
+
+      <h3>📩 How to Apply</h3>
+
+      <p class="left">
+        Interested candidates are requested to send their CV/Resume with a recent photo via WhatsApp:
+      </p>
+
+      <p class="left">
+        📞 <strong>WhatsApp & Contact:</strong> +91 94338 34013<br>
+        📧 <strong>Email:</strong> arws008@gmail.com
+      </p>
+
+      <p class="left">
+        <strong>Organization:</strong> Agni Rural Welfare Society
+      </p>
+
+      <div style="text-align:center; margin: 40px 0;">
+        <button class="volunteer-btn apply-btn" onclick="showPage('nccForm')">
+          Register Now
+        </button>
       </div>
-      
-      <div class="form-group password-group">
-        <label for="registerPass">Password</label>
-        <div class="password-input-wrapper">
-          <input type="password" id="registerPass" placeholder="Create a password">
-          <button type="button" class="password-toggle" onclick="togglePassword('registerPass')">👁️</button>
+
+
+    </section>
+
+    <!-- ================= SUPPORTERS ================= -->
+    <section id="supporters" class="page">
+      <h2>Supporters of the Society</h2>
+      <p class="center-text">
+        Corporate Social Responsibility (CSR) divisions of companies, funding agencies, and
+        institutions may associate with Agni Rural Welfare Society under the
+        <strong>“Supporters of the Society”</strong> category.
+      </p>
+      <p class="center-text">
+        Such support helps strengthen our welfare programs and extend our reach to
+        underserved communities.
+      </p>
+    </section>
+    <!-- ================= GALLERY ================= -->
+    <section id="gallery" class="page">
+      <h2>Gallery</h2>
+      <p class="center-text">
+        Browse through our collection of moments from our social service initiatives and community activities.
+      </p>
+
+      <div class="gallery-container">
+        <div class="gallery-viewer">
+          <div class="gallery-image-wrapper">
+            <img id="galleryImage" src="" alt="Gallery Image" class="gallery-main-image">
+          </div>
+          <div class="gallery-progress">
+            <div class="gallery-progress-bar" id="progressBar"></div>
+          </div>
+          <div class="gallery-counter">
+            <span id="currentImageIndex">1</span> / <span id="totalImages">0</span>
+          </div>
+        </div>
+
+        <div class="gallery-controls">
+          <button class="gallery-btn" onclick="previousImage()">← Previous</button>
+          <button class="gallery-btn" onclick="nextImage()">Next →</button>
         </div>
       </div>
+    </section>
+    <!-- ================= DONATE ================= -->
+    <section id="donate" class="page">
+      <h2>Support Our Mission</h2>
+      <p class="center-text">
+        Your donation helps us continue our mission to support underprivileged children and rural communities.
+        Every contribution makes a meaningful difference!
+      </p>
 
-      <div class="form-group password-group">
-        <label for="registerConfirm">Confirm Password</label>
-        <div class="password-input-wrapper">
-          <input type="password" id="registerConfirm" placeholder="Confirm your password">
-          <button type="button" class="password-toggle" onclick="togglePassword('registerConfirm')">👁️</button>
+      <div class="donation-container">
+        <div class="donation-box">
+          <h3>Choose Donation Amount</h3>
+
+          <div class="donation-options">
+            <button class="amount-btn" onclick="selectAmount(100, this)">₹100</button>
+            <button class="amount-btn" onclick="selectAmount(500, this)">₹500</button>
+            <button class="amount-btn" onclick="selectAmount(1000, this)">₹1,000</button>
+            <button class="amount-btn" onclick="selectAmount(5000, this)">₹5,000</button>
+          </div>
+
+          <div class="custom-amount">
+            <label for="customAmount">Or Enter Custom Amount:</label>
+            <input type="number" id="customAmount" placeholder="Enter amount in ₹" min="1">
+          </div>
+
+          <div class="donor-info">
+            <input type="text" id="donorName" placeholder="Your Full Name" required>
+            <input type="email" id="donorEmail" placeholder="Your Email Address" required>
+            <input type="tel" id="donorPhone" placeholder="Your Phone Number" required>
+          </div>
+
+          <button class="donate-btn" id="payBtn" onclick="initiatePayment()">Proceed to Payment</button>
+
+          <p class="info-text">
+            💳 Secure payment powered by Razorpay<br>
+            ✓ 100% of your donation goes to our welfare programs
+          </p>
+        </div>
+
+        <div class="impact-box">
+          <h3>Your Impact</h3>
+          <div class="impact-item">
+            <strong>₹100</strong><br>Provides books & stationery for one child
+          </div>
+          <div class="impact-item">
+            <strong>₹500</strong><br>One month nutritious meal for a child
+          </div>
+          <div class="impact-item">
+            <strong>₹1,000</strong><br>Educational supplies for a student
+          </div>
+          <div class="impact-item">
+            <strong>₹5,000</strong><br>Monthly support for rural education program
+          </div>
         </div>
       </div>
+    </section>
 
-      <button type="button" onclick="register()" class="auth-button">Create Account</button>
-      
-      <div class="form-footer">
-        <label class="terms-agree">
-          <input type="checkbox" required> I agree to the terms and conditions
-        </label>
+    <!-- ================= CONTACT ================= -->
+    <section id="contact" class="page">
+      <h2>Contact Us</h2>
+      <p class="center-text">
+        We welcome individuals, volunteers, donors, and organizations to connect with us.
+      </p>
+      <p class="center-text">
+        <strong>Phone:</strong> +91 9433834013
+      </p>
+      <p class="center-text">
+        <strong>YouTube:</strong> <a href="https://www.youtube.com/@Agniruralwelfaresociety"
+          target="_blank">https://www.youtube.com/@Agniruralwelfaresociety</a>
+      </p>
+      <p class="center-text">
+        <strong>Facebook:</strong> <a href="https://www.facebook.com/profile.php?id=61559729252246&mibextid=ZbWKwL"
+          target="_blank">https://www.facebook.com/profile.php?id=61559729252246&mibextid=ZbWKwL</a>
+      </p>
+    </section>
+
+    <!-- ================= NCC RECRUITMENT FORM ================= -->
+    <section id="nccForm" class="page">
+      <h2>NCC Recruitment Application Form</h2>
+      <p class="center-text">
+        Please fill out all the required fields below to apply for NCC Trainer position.
+      </p>
+
+      <div class="form-page-container">
+        <form id="nccRecruitmentForm" class="ncc-form" onsubmit="submitNCCForm(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="nccName">Name <span class="required">*</span></label>
+              <input type="text" id="nccName" name="name" placeholder="Enter your full name" required>
+            </div>
+
+            <div class="form-group">
+              <label for="nccGender">Gender <span class="required">*</span></label>
+              <select id="nccGender" name="gender" required>
+                <option value="">Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="nccMobile">Mobile Number <span class="required">*</span></label>
+              <input type="tel" id="nccMobile" name="mobile" placeholder="Enter your mobile number" required>
+            </div>
+
+            <div class="form-group">
+              <label for="nccEmail">Email ID <span class="required">*</span></label>
+              <input type="email" id="nccEmail" name="email" placeholder="Enter your email address" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="nccAddress">Address <span class="required">*</span></label>
+            <textarea id="nccAddress" name="address" rows="3" placeholder="Enter your complete address"
+              required></textarea>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="nccJob">Which Job to Apply <span class="required">*</span></label>
+              <select id="nccJob" name="job" required>
+                <option value="">Select Job Position</option>
+                <option value="NCC Trainer">NCC Trainer</option>
+                <option value="Drill Instructor">Drill Instructor</option>
+                <option value="Physical Training Instructor">Physical Training Instructor</option>
+                <option value="Band Instructor">Band Instructor</option>
+                <option value="Disaster Management Trainer">Disaster Management Trainer</option>
+                <option value="NDA/IMA/OTA Preparation Trainer">NDA/IMA/OTA Preparation Trainer</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="nccQualification">Qualification <span class="required">*</span></label>
+              <input type="text" id="nccQualification" name="qualification" placeholder="e.g., Graduate, Post Graduate"
+                required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="nccInstitute">Institute Name <span class="required">*</span></label>
+              <input type="text" id="nccInstitute" name="institute" placeholder="Enter your institute/university name"
+                required>
+            </div>
+
+            <div class="form-group">
+              <label for="nccJobPortal">Job Portal</label>
+              <input type="text" id="nccJobPortal" name="jobPortal"
+                placeholder="Where did you find this job? (Optional)">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="nccPurpose">Purpose <span class="required">*</span></label>
+            <textarea id="nccPurpose" name="purpose" rows="4"
+              placeholder="Explain why you want to apply for this position" required></textarea>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="nccApplicationDate">Application Date <span class="required">*</span></label>
+              <input type="date" id="nccApplicationDate" name="applicationDate" required>
+            </div>
+          </div>
+
+          <div class="form-group checkbox-group">
+            <label class="checkbox-label">
+              <input type="checkbox" id="nccAgree" required>
+              <span>I confirm that all the information provided is true and accurate <span
+                  class="required">*</span></span>
+            </label>
+          </div>
+
+          <button type="submit" class="form-submit-btn">Submit Application</button>
+        </form>
       </div>
-    </form>
+    </section>
+
+    <footer>
+      <p>© Agni Rural Welfare Society | Serving Society with Responsibility</p>
+    </footer>
+
   </div>
 
-  <div class="auth-side-decoration">
-    <div class="decoration-circle decoration-1"></div>
-    <div class="decoration-circle decoration-2"></div>
-    <div class="decoration-circle decoration-3"></div>
-  </div>
-
-  <!-- Loading Overlay -->
-  <div id="loadingOverlay" class="loading-overlay">
-    <div class="loading-container">
-      <div class="spinner"></div>
-      <p class="verifying-text">Verifying</p>
-    </div>
-  </div>
-
-</div>
-
-<!-- ================= WEBSITE ================= -->
-<div id="website" style="display:none;">
-
-  <header>
-    <h1>Agni Rural Welfare Society</h1>
-    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-    <nav>
-      <a onclick="showPage('home')">Home</a>
-      <a onclick="showPage('about')">About Us</a>
-      <a onclick="showPage('activities')">Activities</a>
-      <a onclick="showPage('jobs')">Jobs</a>
-      <a onclick="showPage('membership')">Membership</a>
-      <a onclick="showPage('volunteer')">Volunteer</a>
-      <a onclick="showPage('supporters')">Supporters</a>
-      <a onclick="showPage('gallery')">Gallery</a>
-      <a onclick="showPage('donate')">Donate</a>
-      <a onclick="showPage('contact')">Contact</a>
-      <a onclick="logout()">Logout</a>
-    </nav>
-  </header>
-
-  <section class="card">
-    <h3>Welcome, <span id="displayUser"></span></h3>
-  </section>
-
-  <!-- ================= HOME ================= -->
-  <section id="home" class="page active">
-    <div class="slider">
-      <div class="slides">
-        <img src="image1.jpg">
-        <img src="image3.jpg">
-        <img src="image4.jpg">
-        <img src="image1.jpg">
-        <img src="image4.jpg">
-        <img src="image3.jpg">
-      </div>
-      <div class="slider-text">
-        <h2>Spreading Joy Through Social Service</h2>
-        <p>Working together for children, communities, and a better tomorrow</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= ABOUT ================= -->
-  <section id="about" class="page">
-    <h2>About Us</h2>
-    <p class="center-text">
-      Agni Rural Welfare Society is a non-profit organization committed to social service
-      and community development. Our primary focus is to support underprivileged children,
-      rural families, and vulnerable communities through education, care, relief work,
-      and social awareness initiatives.
-    </p>
-    <p class="center-text">
-      We believe that social service is a noble responsibility and that collective effort
-      can bring meaningful change to society.
-    </p>
-  </section>
-
-  <!-- ================= ACTIVITIES ================= -->
-  <section id="activities" class="page">
-    <h2>Our Social Activities</h2>
-    <p class="center-text">
-      As part of our ongoing social initiatives, Agni Rural Welfare Society supports poor
-      school students in the Sundarbans by providing new clothes, study materials, portion food,
-      and essential items.
-    </p>
-    <p class="center-text">
-      These activities aim to bring joy, dignity, and a sense of inclusion to children from
-      economically disadvantaged backgrounds.
-    </p>
-
-    <div class="activities-gallery">
-      <img src="image5.jpg">
-      <img src="image6.jpg">
-      <img src="image7.jpg">
-      <img src="image8.jpg">
-      <img src="image9.jpg">
-      <img src="image10.jpg">
-    </div>
-  </section>
-
-  <!-- ================= JOBS ================= -->
-  <section id="jobs" class="page">
-    <h2>Job Vacancy – NCC Trainers</h2>
-    <p class="center-text">
-      Agni Rural Welfare Society (NGO) invites applications for full-time Trainer / Drill
-      Instructor roles under our NGO training projects.
-    </p>
-    <p class="center-text">
-      Training areas include Drill, Band, Physical Training, Sports, Obstacle Management,
-      Disaster Management, Civil Defence, and preparation for NDA, IMA, OTA (Indian Army,
-      Navy, Air Force) examinations.
-    </p>
-    <p class="center-text">
-      Interested candidates may send their CV or Resume with photograph via WhatsApp.
-    </p>
-    <div class="center-img">
-      <img src="image13.png" alt="jobs">
-    </div>
-  </section>
-
-  <!-- ================= MEMBERSHIP ================= -->
-  <section id="membership" class="page">
-    <h2>Become a Member</h2>
-    <p class="center-text">
-      Membership at Agni Rural Welfare Society is for social service and social responsibility.
-      It is not intended for political or profit-making purposes.
-    </p>
-    <p class="center-text">
-      Members are encouraged to actively participate in service activities or indirectly
-      support the organization’s welfare initiatives.
-    </p>
-
-    <div class="center-img">
-      <img src="image12.png" alt="Membership Criteria">
-    </div>
-
-    <p class="center-text">
-      <strong>Benefits of Membership:</strong><br>
-      Members are invited to participate in various activities and events organized by
-      Agni Rural Welfare Society.<br>
-      <em>Terms & Conditions Apply.</em>
-    </p>
-  </section>
-
-  <!-- ================= VOLUNTEER ================= -->
-  <section id="volunteer" class="page">
-    <h2>Join as a Volunteer</h2>
-    <p class="center-text">
-      Volunteering with Agni Rural Welfare Society is an opportunity to engage in meaningful
-      social service and contribute to community welfare.
-    </p>
-    <p class="center-text">
-      Volunteers play an important role in supporting activities, outreach programs, and
-      service initiatives.
-    </p>  
-  </section>
-
-  <!-- ================= SUPPORTERS ================= -->
-  <section id="supporters" class="page">
-    <h2>Supporters of the Society</h2>
-    <p class="center-text">
-      Corporate Social Responsibility (CSR) divisions of companies, funding agencies, and
-      institutions may associate with Agni Rural Welfare Society under the
-      <strong>“Supporters of the Society”</strong> category.
-    </p>
-    <p class="center-text">
-      Such support helps strengthen our welfare programs and extend our reach to
-      underserved communities.
-    </p>
-  </section>
-  <!-- ================= GALLERY ================= -->
-  <section id="gallery" class="page">
-    <h2>Gallery</h2>
-    <p class="center-text">
-      Browse through our collection of moments from our social service initiatives and community activities.
-    </p>
-    
-    <div class="gallery-container">
-      <div class="gallery-viewer">
-        <div class="gallery-image-wrapper">
-          <img id="galleryImage" src="" alt="Gallery Image" class="gallery-main-image">
-        </div>
-        <div class="gallery-progress">
-          <div class="gallery-progress-bar" id="progressBar"></div>
-        </div>
-        <div class="gallery-counter">
-          <span id="currentImageIndex">1</span> / <span id="totalImages">0</span>
-        </div>
-      </div>
-      
-      <div class="gallery-controls">
-        <button class="gallery-btn" onclick="previousImage()">← Previous</button>
-        <button class="gallery-btn" onclick="nextImage()">Next →</button>
-      </div>
-    </div>
-  </section>
-  <!-- ================= DONATE ================= -->
-  <section id="donate" class="page">
-    <h2>Support Our Mission</h2>
-    <p class="center-text">
-      Your donation helps us continue our mission to support underprivileged children and rural communities.
-      Every contribution makes a meaningful difference!
-    </p>
-
-    <div class="donation-container">
-      <div class="donation-box">
-        <h3>Choose Donation Amount</h3>
-        
-        <div class="donation-options">
-           <button class="amount-btn" onclick="selectAmount(100, this)">₹100</button>
-           <button class="amount-btn" onclick="selectAmount(500, this)">₹500</button>
-           <button class="amount-btn" onclick="selectAmount(1000, this)">₹1,000</button>
-           <button class="amount-btn" onclick="selectAmount(5000, this)">₹5,000</button>
-        </div>
-
-        <div class="custom-amount">
-          <label for="customAmount">Or Enter Custom Amount:</label>
-          <input type="number" id="customAmount" placeholder="Enter amount in ₹" min="1">
-        </div>
-
-        <div class="donor-info">
-          <input type="text" id="donorName" placeholder="Your Full Name" required>
-          <input type="email" id="donorEmail" placeholder="Your Email Address" required>
-          <input type="tel" id="donorPhone" placeholder="Your Phone Number" required>
-        </div>
-
-        <button class="donate-btn" onclick="initiatePayment()">Proceed to Payment</button>
-
-        <p class="info-text">
-          💳 Secure payment powered by Razorpay<br>
-          ✓ 100% of your donation goes to our welfare programs
-        </p>
-      </div>
-
-      <div class="impact-box">
-        <h3>Your Impact</h3>
-        <div class="impact-item">
-          <strong>₹100</strong><br>Provides books & stationery for one child
-        </div>
-        <div class="impact-item">
-          <strong>₹500</strong><br>One month nutritious meal for a child
-        </div>
-        <div class="impact-item">
-          <strong>₹1,000</strong><br>Educational supplies for a student
-        </div>
-        <div class="impact-item">
-          <strong>₹5,000</strong><br>Monthly support for rural education program
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= CONTACT ================= -->
-  <section id="contact" class="page">
-    <h2>Contact Us</h2>
-    <p class="center-text">
-      We welcome individuals, volunteers, donors, and organizations to connect with us.
-    </p>
-    <p class="center-text">
-      <strong>Phone:</strong> +91 9433834013
-    </p>
-    <p class="center-text">
-      <strong>YouTube:</strong> <a href="https://www.youtube.com/@Agniruralwelfaresociety" target="_blank">https://www.youtube.com/@Agniruralwelfaresociety</a>
-    </p>
-    <p class="center-text">
-      <strong>Facebook:</strong> <a href="https://www.facebook.com/profile.php?id=61559729252246&mibextid=ZbWKwL" target="_blank">https://www.facebook.com/profile.php?id=61559729252246&mibextid=ZbWKwL</a>
-    </p>
-  </section>
-
-  <footer>
-    <p>© Agni Rural Welfare Society | Serving Society with Responsibility</p>
-  </footer>
-
-</div>
-
-<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-<script src="script.js"></script>
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <script src="script.js"></script>
 </body>
+
 </html>
