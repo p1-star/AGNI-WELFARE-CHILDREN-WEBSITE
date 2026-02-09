@@ -1,0 +1,28 @@
+{
+  "name": "agni-ngo-backend",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^17.2.4",
+    "express": "^5.2.1",
+    "mongoose": "^8.22.1",
+    "razorpay": "^2.9.6"
+  },
+  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/p1-star/AGNI-WELFARE-CHILDREN-WEBSITE-CREATING.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/p1-star/AGNI-WELFARE-CHILDREN-WEBSITE-CREATING/issues"
+  },
+  "homepage": "https://github.com/p1-star/AGNI-WELFARE-CHILDREN-WEBSITE-CREATING#readme"
+}
