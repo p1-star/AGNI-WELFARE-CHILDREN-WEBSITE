@@ -1,12 +1,24 @@
 // ================= MOBILE MENU =================
 function toggleMenu() {
   const header = document.querySelector("header");
+  const overlay = document.getElementById("menuOverlay");
   header.classList.toggle("menu-open");
+  
+  if (header.classList.contains("menu-open")) {
+    overlay.classList.add("active");
+    document.body.style.overflow = "hidden";
+  } else {
+    overlay.classList.remove("active");
+    document.body.style.overflow = "";
+  }
 }
 
 function closeMenu() {
   const header = document.querySelector("header");
+  const overlay = document.getElementById("menuOverlay");
   header.classList.remove("menu-open");
+  overlay.classList.remove("active");
+  document.body.style.overflow = "";
 }
 
 // Close menu when clicking a link
@@ -18,10 +30,10 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // ================= PASSWORD VISIBILITY TOGGLE =================
-function togglePassword(inputId) {
+function togglePassword(inputId, btn) {
   const input = document.getElementById(inputId);
-  const button = event.target;
-  
+  const button = btn;
+
   if (input.type === "password") {
     input.type = "text";
     button.textContent = "🙈";
@@ -49,9 +61,29 @@ function switchTab(tab) {
   if (tab === "login") {
     document.getElementById("loginForm").classList.add("active");
     document.querySelectorAll(".tab-btn")[0].classList.add("active");
-  } else if (tab === "register") {
+  } else {
     document.getElementById("registerForm").classList.add("active");
     document.querySelectorAll(".tab-btn")[1].classList.add("active");
+  }
+}
+
+// ================= HELPER =================
+function getFirstName(name) {
+  if (!name) return "";
+  return name.split(" ")[0];
+}
+
+// ================= HEADER AUTH BUTTON UPDATE =================
+function updateAuthButton() {
+  const authBtn = document.getElementById("authBtn");
+  if (!authBtn) return;
+
+  if (localStorage.getItem("loggedIn") === "yes") {
+    authBtn.textContent = "Logout";
+    authBtn.onclick = logout;
+  } else {
+    authBtn.textContent = "Login";
+    authBtn.onclick = openLogin;
   }
 }
 
@@ -60,36 +92,26 @@ function login() {
   const user = document.getElementById("loginUser").value.trim();
   const pass = document.getElementById("loginPass").value;
 
-  if (!user) {
-    alert("Please enter your username");
-    return;
-  }
+  if (!user) return alert("Please enter your username");
+  if (!pass) return alert("Please enter your password");
 
-  if (!pass) {
-    alert("Please enter your password");
-    return;
-  }
-
-  // Show loading overlay
   showLoading();
 
-  // Simulate verification delay
   setTimeout(() => {
-    // Store login data
     localStorage.setItem("loggedIn", "yes");
     localStorage.setItem("username", user);
 
-    // Update display and show website
-    document.getElementById("displayUser").innerText = user;
+    alert("✓ Login Successful!\n\nWelcome " + getFirstName(user));
+
     document.getElementById("loginUser").value = "";
     document.getElementById("loginPass").value = "";
-    
+
     document.getElementById("authSection").style.display = "none";
     document.getElementById("website").style.display = "block";
 
-    // Hide loading overlay
     hideLoading();
-
+    updateAuthButton();
+    updateWelcomeName();
     showPage("home");
   }, 2000);
 }
@@ -101,71 +123,24 @@ function register() {
   const pass = document.getElementById("registerPass").value;
   const confirm = document.getElementById("registerConfirm").value;
 
-  // Validation
-  if (!name) {
-    alert("Please enter your full name");
-    return;
-  }
+  if (!name || !email || !pass || !confirm) return alert("Please fill all fields");
+  if (pass !== confirm) return alert("Passwords do not match");
 
-  if (!email) {
-    alert("Please enter your email");
-    return;
-  }
-
-  if (!email.includes("@") || !email.includes(".")) {
-    alert("Please enter a valid email address");
-    return;
-  }
-
-  if (!pass) {
-    alert("Please enter a password");
-    return;
-  }
-
-  if (pass.length < 6) {
-    alert("Password must be at least 6 characters long");
-    return;
-  }
-
-  if (!confirm) {
-    alert("Please confirm your password");
-    return;
-  }
-
-  if (pass !== confirm) {
-    alert("Passwords do not match. Please try again");
-    return;
-  }
-
-  // Show loading overlay
   showLoading();
 
-  // Simulate verification delay
   setTimeout(() => {
-    // Success - Store user data
     localStorage.setItem("loggedIn", "yes");
     localStorage.setItem("username", name);
     localStorage.setItem("userEmail", email);
 
-    // Show success message
-    alert("✓ Registration successful!\n\nWelcome " + name + "!\n\nYou are now logged in.");
-    
-    // Clear all form fields
-    document.getElementById("registerName").value = "";
-    document.getElementById("registerEmail").value = "";
-    document.getElementById("registerPass").value = "";
-    document.getElementById("registerConfirm").value = "";
-    document.querySelector(".terms-agree input").checked = false;
+    alert("✓ Registration Successful!\n\nWelcome " + getFirstName(name));
 
-    // Update display and show website
-    document.getElementById("displayUser").innerText = name;
     document.getElementById("authSection").style.display = "none";
     document.getElementById("website").style.display = "block";
-    
-    // Hide loading overlay
+
     hideLoading();
-    
-    // Show home page
+    updateAuthButton();
+    updateWelcomeName();
     showPage("home");
   }, 2000);
 }
@@ -174,16 +149,33 @@ function register() {
 function showPage(id) {
   document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
   document.getElementById(id).classList.add("active");
-  
-  // Initialize gallery when gallery page is shown
-  if (id === "gallery") {
-    initGallery();
+
+  if (id === "gallery") initGallery();
+
+  if (id === "nccForm") {
+    setTimeout(() => {
+      const dateInput = document.getElementById("nccApplicationDate");
+      if (dateInput && !dateInput.value) {
+        const today = new Date().toISOString().split('T')[0];
+        dateInput.value = today;
+      }
+    }, 100);
   }
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ================= OPEN LOGIN =================
+function openLogin() {
+  document.getElementById("website").style.display = "none";
+  document.getElementById("authSection").style.display = "flex";
+  switchTab("login");
 }
 
 // ================= LOGOUT =================
 function logout() {
   localStorage.clear();
+  updateAuthButton();
   document.getElementById("website").style.display = "none";
   document.getElementById("authSection").style.display = "flex";
   switchTab("login");
@@ -192,59 +184,44 @@ function logout() {
 // ================= GALLERY =================
 let galleryImages = [];
 let currentImageIndex = 0;
-const animationTypes = ['slideInAndZoom', 'animate-rotate', 'animate-slide-left', 'animate-slide-right', 'animate-bounce'];
-let currentAnimationIndex = 0;
 
 function initGallery() {
-  // List of all images in the workspace
   galleryImages = [
-    "image1.jpg", "image3.jpg", "image4.jpg", "image5.jpg",
-    "image6.jpg", "image7.jpg", "image8.jpg", "image9.jpg", "image10.jpg",
-    "image11.jpg", "image14.jpg", "image15.jpg",
-    "image16.jpg", "image17.jpg", "image18.jpg", "image19.jpg", "image20.jpg",
-    "image21.jpg"
+    "image1.jpg","image3.jpg","image4.jpg","image5.jpg","image6.jpg","image7.jpg","image8.jpg",
+    "image10.jpg","image11.jpg","image14.jpg","image15.jpg","image16.jpg","image17.jpg","image18.jpg",
+    "image19.jpg","image21.jpg","image22.jpg","image23.jpg","image24.jpg","image25.jpg","image26.jpg",
+    "image27.jpg","image28.jpg","image29.jpg","image30.jpg","image31.jpg","image32.jpg","image33.jpg",
+    "image34.jpg","image35.jpg","image36.jpg","image37.jpg","image38.jpg","image39.jpg","image40.jpg",
+    "image41.jpg","image42.jpg","image43.jpg","image44.jpg","image45.jpg","image46.jpg","image47.jpg",
+    "image48.jpg","image49.jpg","image50.jpg"
   ];
-  
+
   currentImageIndex = 0;
   document.getElementById("totalImages").innerText = galleryImages.length;
   loadGalleryImage();
 }
 
 function loadGalleryImage() {
-  if (galleryImages.length > 0) {
-    const imgElement = document.getElementById("galleryImage");
-    
-    // Remove all animation classes
-    animationTypes.forEach(anim => imgElement.classList.remove(anim));
-    
-    // Apply random or sequential animation
-    const animationType = animationTypes[currentAnimationIndex % animationTypes.length];
-    imgElement.classList.add(animationType);
-    currentAnimationIndex++;
-    
-    // Update image source
-    imgElement.src = galleryImages[currentImageIndex];
-    document.getElementById("currentImageIndex").innerText = currentImageIndex + 1;
-    
-    // Update progress bar
-    const progress = ((currentImageIndex + 1) / galleryImages.length) * 100;
-    document.getElementById("progressBar").style.width = progress + "%";
-  }
+  if (!galleryImages.length) return;
+
+  document.getElementById("galleryImage").src = galleryImages[currentImageIndex];
+  document.getElementById("currentImageIndex").innerText = currentImageIndex + 1;
+
+  const progress = ((currentImageIndex + 1) / galleryImages.length) * 100;
+  document.getElementById("progressBar").style.width = progress + "%";
 }
 
 function nextImage() {
-  if (galleryImages.length > 0) {
-    currentImageIndex = (currentImageIndex + 1) % galleryImages.length;
-    loadGalleryImage();
-  }
+  currentImageIndex = (currentImageIndex + 1) % galleryImages.length;
+  loadGalleryImage();
 }
 
 function previousImage() {
-  if (galleryImages.length > 0) {
-    currentImageIndex = (currentImageIndex - 1 + galleryImages.length) % galleryImages.length;
-    loadGalleryImage();
-  }
+  currentImageIndex = (currentImageIndex - 1 + galleryImages.length) % galleryImages.length;
+  loadGalleryImage();
 }
+
+document.addEventListener("DOMContentLoaded", initGallery);
 
 // ================= DONATION =================
 let selectedAmount = 0;
@@ -256,74 +233,136 @@ function selectAmount(amount, btn) {
   document.getElementById("customAmount").value = "";
 }
 
-// ================= PAYMENT =================
-async function initiatePayment() {
-  try {
-    const customAmount = document.getElementById("customAmount").value;
-    const amount = customAmount ? parseInt(customAmount) : selectedAmount;
-
-    const name = document.getElementById("donorName").value.trim();
-    const email = document.getElementById("donorEmail").value.trim();
-    const phone = document.getElementById("donorPhone").value.trim();
-
-    if (!amount || amount < 1) {
-      alert("Please select or enter a valid amount (minimum ₹1)");
-      return;
-    }
-    if (!name || !email || !phone) {
-      alert("Please fill all donor details");
-      return;
-    }
-
-    // Validate email format
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      alert("Please enter a valid email address");
-      return;
-    }
-
-    // Validate phone number (10 digits)
-    const phoneRegex = /^\d{10}$/;
-    if (!phoneRegex.test(phone.replace(/\D/g, ''))) {
-      alert("Please enter a valid 10-digit phone number");
-      return;
-    }
-
-    // Demo mode - show success without backend
-    const paymentId = "demo_" + Date.now();
-    
-    alert(
-      "✓ Payment Successful (Demo Mode)!\n\n" +
-      "Name: " + name + "\n" +
-      "Amount: ₹" + amount + "\n" +
-      "Payment ID: " + paymentId
-    );
-    
-    resetDonationForm();
-    showPage("home");
-
-  } catch (err) {
-    console.error(err);
-    alert("Payment processing failed. Please try again.");
-  }
-}
-
-function resetDonationForm() {
-  selectedAmount = 0;
-  document.getElementById("customAmount").value = "";
-  document.getElementById("donorName").value = "";
-  document.getElementById("donorEmail").value = "";
-  document.getElementById("donorPhone").value = "";
-  document.querySelectorAll(".amount-btn").forEach(b => b.classList.remove("selected"));
-}
-
 // ================= AUTO LOGIN =================
 window.addEventListener("load", () => {
   if (localStorage.getItem("loggedIn") === "yes") {
-    const user = localStorage.getItem("username");
-    document.getElementById("displayUser").innerText = user;
     document.getElementById("authSection").style.display = "none";
     document.getElementById("website").style.display = "block";
+    updateAuthButton();
+    updateWelcomeName();
     showPage("home");
+  } else {
+    updateAuthButton();
   }
 });
+
+function updateWelcomeName() {
+  const welcomeEl = document.getElementById("welcomeText");
+  if (!welcomeEl) return;
+
+  const name = localStorage.getItem("username");
+  welcomeEl.textContent =
+    localStorage.getItem("loggedIn") === "yes" && name ? "Welcome, " + name : "Welcome";
+}
+
+// ================= NCC RECRUITMENT FORM SUBMISSION =================
+async function submitNCCForm(event) {
+  event.preventDefault();
+
+  const formData = {
+    name: document.getElementById("nccName").value.trim(),
+    gender: document.getElementById("nccGender").value,
+    mobile: document.getElementById("nccMobile").value.trim(),
+    email: document.getElementById("nccEmail").value.trim(),
+    address: document.getElementById("nccAddress").value.trim(),
+    job: document.getElementById("nccJob").value,
+    qualification: document.getElementById("nccQualification").value.trim(),
+    institute: document.getElementById("nccInstitute").value.trim(),
+    jobPortal: document.getElementById("nccJobPortal").value.trim() || "N/A",
+    purpose: document.getElementById("nccPurpose").value.trim(),
+    applicationDate: document.getElementById("nccApplicationDate").value
+  };
+
+  if (!formData.name || !formData.gender || !formData.mobile || !formData.email ||
+      !formData.address || !formData.job || !formData.qualification ||
+      !formData.institute || !formData.purpose || !formData.applicationDate) {
+    return alert("Please fill all required fields");
+  }
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(formData.email)) return alert("Invalid email address");
+
+  const phoneRegex = /^\d{10}$/;
+  if (!phoneRegex.test(formData.mobile.replace(/\D/g, ''))) return alert("Invalid mobile number");
+
+  const submitBtn = event.target.querySelector('.form-submit-btn') || event.target;
+  const originalText = submitBtn.textContent;
+  submitBtn.textContent = "Submitting...";
+  submitBtn.disabled = true;
+
+  try {
+    const response = await fetch("http://localhost:5000/api/ncc-application", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData)
+    });
+
+    const result = await response.json();
+
+    if (response.ok) {
+      alert("✓ Application Submitted Successfully!\n\nApplication ID: " + result.applicationId);
+      document.getElementById("nccRecruitmentForm").reset();
+      showPage("home");
+    } else {
+      throw new Error(result.message || "Submission failed");
+    }
+  } catch (error) {
+    alert("❌ Failed to submit application.\n\n" + error.message);
+  } finally {
+    submitBtn.textContent = originalText;
+    submitBtn.disabled = false;
+  }
+}
+
+// ================= PAYMENT =================
+const payBtn = document.getElementById("payBtn");
+if (payBtn) {
+  payBtn.addEventListener("click", async function () {
+    const customAmount = document.getElementById("customAmount").value;
+    const amount = selectedAmount || Number(customAmount);
+
+    if (!amount || amount < 1) return alert("Please select or enter valid amount");
+
+    try {
+      const res = await fetch("http://localhost:5000/create-order", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ amount })
+      });
+
+      const order = await res.json();
+
+      const options = {
+        key: "rzp_live_SCozJj700VYcQQ",
+        amount: order.amount,
+        currency: "INR",
+        name: "Agni Rural Welfare Society",
+        description: "Donation",
+        order_id: order.id,
+        handler: async function (response) {
+          alert("✅ Payment Successful!");
+
+          await fetch("http://localhost:5000/save-donation", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              name: document.querySelector('input[placeholder="Name"]')?.value || "Guest",
+              email: document.querySelector('input[placeholder="Email"]')?.value || "N/A",
+              phone: document.querySelector('input[placeholder="Phone"]')?.value || "N/A",
+              amount: amount,
+              razorpay_payment_id: response.razorpay_payment_id
+            })
+          });
+        },
+        theme: { color: "#146b4f" }
+      };
+
+      const rzp = new Razorpay(options);
+      rzp.open();
+
+    } catch (err) {
+      alert("❌ Payment Failed");
+      console.error(err);
+    }
+  });
+}
