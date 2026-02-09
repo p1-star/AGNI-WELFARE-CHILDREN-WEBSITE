@@ -166,3 +166,20 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
 });
+
+const NCCApplication = require("./NCCApplication");
+
+app.post("/api/ncc-application", async (req, res) => {
+  try {
+    const application = new NCCApplication(req.body);
+    await application.save();
+
+    res.json({
+      success: true,
+      applicationId: application._id
+    });
+  } catch (err) {
+    console.error("NCC save error:", err);
+    res.status(500).json({ success: false, message: "Failed to submit application" });
+  }
+});
