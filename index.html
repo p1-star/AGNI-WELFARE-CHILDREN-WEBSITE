@@ -747,7 +747,7 @@
     <section id="nccForm" class="page">
       <h2>NCC Recruitment Application Form</h2>
       <p class="center-text">
-        Please fill out all the required fields below to apply for NCC Trainer position.
+        Please fill out all the required fields below to apply for the internship position.
       </p>
 
       <div class="form-page-container">
@@ -788,15 +788,15 @@
 
           <div class="form-row">
             <div class="form-group">
-              <label for="nccJob">Which Job to Apply <span class="required">*</span></label>
+              <label for="nccJob">Which Internship are you applying for? <span class="required">*</span></label>
               <select id="nccJob" name="job" required>
-                <option value="">Select Job Position</option>
-                <option value="NCC Trainer">NCC Trainer</option>
-                <option value="Drill Instructor">Drill Instructor</option>
-                <option value="Physical Training Instructor">Physical Training Instructor</option>
-                <option value="Band Instructor">Band Instructor</option>
-                <option value="Disaster Management Trainer">Disaster Management Trainer</option>
-                <option value="NDA/IMA/OTA Preparation Trainer">NDA/IMA/OTA Preparation Trainer</option>
+                <option value="">Select Internship</option>
+                <option value="Volunteer Trainer (NCC C Certificate Internship)">
+                  Volunteer Trainer (NCC ‘C’ Certificate Internship)
+                </option>
+                <option value="NGO Fundraising & Field Coordinator Internship">
+                  NGO Fundraising & Field Coordinator Internship
+                </option>
               </select>
             </div>
 
@@ -805,6 +805,11 @@
               <input type="text" id="nccQualification" name="qualification" placeholder="e.g., Graduate, Post Graduate"
                 required>
             </div>
+          </div>
+
+          <div class="form-group">
+            <label for="nccCV">Upload CV/Resume with Photo <span class="required">*</span></label>
+            <input type="file" id="nccCV" name="cv" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" required>
           </div>
 
           <div class="form-row">
@@ -822,7 +827,7 @@
           </div>
 
           <div class="form-group">
-            <label for="nccPurpose">Purpose <span class="required">*</span></label>
+            <label for="nccPurpose">Why do you want to join this internship? <span class="required">*</span></label>
             <textarea id="nccPurpose" name="purpose" rows="4"
               placeholder="Explain why you want to apply for this position" required></textarea>
           </div>
